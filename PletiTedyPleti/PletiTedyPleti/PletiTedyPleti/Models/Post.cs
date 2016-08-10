@@ -34,13 +34,7 @@ namespace PletiTedyPleti.Models
         [Required]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
-
-        [StringLength(128)]
-        public string AuthorId { get; set; }
-
-        [ForeignKey("AuthorId")]
-        public ApplicationUser Author { get; set; }
-
+        
         public int LikeCounter { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }

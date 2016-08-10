@@ -17,7 +17,7 @@ namespace PletiTedyPleti.Controllers
         // GET: Posts
         public ActionResult Index()
         {
-            var posts = db.Posts.Include(p => p.Author);
+            var posts = db.Posts.Include(p => p.Date);
             return View(posts.ToList());
         }
 
@@ -79,7 +79,7 @@ namespace PletiTedyPleti.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Category,Title,Body,Date,AuthorId,LikeCounter")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Category,Title,Body,Date,LikeCounter")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace PletiTedyPleti.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "Email", post.AuthorId);
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "Email");
             return View(post);
         }
 
