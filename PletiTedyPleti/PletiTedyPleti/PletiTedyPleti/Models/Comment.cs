@@ -8,7 +8,7 @@ namespace PletiTedyPleti.Models
 {
     public class Comment
     {
-        Comment()
+        public Comment()
         {
             this.Date = DateTime.Now;
         }
@@ -22,15 +22,13 @@ namespace PletiTedyPleti.Models
 
         public int PostId { get; set; }
 
-        [StringLength(128)]
-        public string AuthorId { get; set; }
+        
+        public ApplicationUser Author { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
-        public virtual ApplicationUser Author { get; set; }
-
-        public virtual Post Post { get; set; }
+        public Post Post { get; set; }
     }
 }

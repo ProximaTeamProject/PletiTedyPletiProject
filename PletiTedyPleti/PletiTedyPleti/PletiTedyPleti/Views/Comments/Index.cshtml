@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Author.Email)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Post.Category)
         </th>
         <th>
@@ -28,9 +25,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.Email)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Post.Category)
         </td>

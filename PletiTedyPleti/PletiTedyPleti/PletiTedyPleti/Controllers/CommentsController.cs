@@ -17,7 +17,7 @@ namespace PletiTedyPleti.Controllers
         // GET: Comments
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Author).Include(c => c.Post);
+            var comments = db.Comments.Include(c => c.Post);
             return View(comments.ToList());
         }
 
@@ -48,7 +48,7 @@ namespace PletiTedyPleti.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Body,PostId,AuthorId,Date")] Comment comment)
+        public ActionResult Create([Bind(Include = "Id,Body,PostId,Date")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace PletiTedyPleti.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Body,PostId,AuthorId,Date")] Comment comment)
+        public ActionResult Edit([Bind(Include = "Id,Body,PostId,Date")] Comment comment)
         {
             if (ModelState.IsValid)
             {
