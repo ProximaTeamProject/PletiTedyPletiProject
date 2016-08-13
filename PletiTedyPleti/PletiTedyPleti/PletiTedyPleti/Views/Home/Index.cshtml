@@ -10,15 +10,15 @@
 </div>
 
 <div class="row">
-   <div class="col-md-4">
-        @foreach (var post in Model)
-        {
-            <h2>@post.Title</h2>
-            <div>
-                Posted on<i>@post.Date</i>
-            </div>
-            <p>@post.Body</p>
-        }
+    @foreach (var post in Model)
+    {
+    <div class="col-md-4">
+        <h2>@post.Title</h2>
+        <div>
+            Posted on<i>@post.Date</i>
+        </div>
+        <p>@PletiTedyPleti.Classes.Utils.CutText(post.Body,80)</p>
     </div>
+    }
 </div>
 

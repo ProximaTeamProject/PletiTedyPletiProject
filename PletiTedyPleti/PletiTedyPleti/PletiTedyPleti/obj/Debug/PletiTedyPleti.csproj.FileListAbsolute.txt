@@ -284,3 +284,4 @@ C:\Users\Teodora\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedy
 C:\Users\Teodora\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Teodora\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.dll
 C:\Users\Teodora\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.pdb
+C:\Users\Teodora\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.csprojResolveAssemblyReference.cache

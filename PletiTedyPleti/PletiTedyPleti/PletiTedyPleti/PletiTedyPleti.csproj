@@ -196,6 +196,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Classes\Utils.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -303,6 +304,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="img\alpine\" />
+    <Folder Include="img\arktis\" />
+    <Folder Include="img\BTM\" />
+    <Folder Include="img\gradski angel\" />
+    <Folder Include="img\maria\" />
+    <Folder Include="img\rastaMan\" />
+    <Folder Include="img\rosana\" />
+    <Folder Include="img\sencio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
