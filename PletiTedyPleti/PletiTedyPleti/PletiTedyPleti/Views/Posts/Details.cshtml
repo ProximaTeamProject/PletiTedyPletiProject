@@ -50,6 +50,16 @@
             @Html.DisplayFor(model => model.LikeCounter)
         </dd>
 
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tags.FirstOrDefault().Name)
+
+        </dd>
+
     </dl>
 </div>
 <p>
