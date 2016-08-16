@@ -15,8 +15,6 @@ namespace PletiTedyPleti.Models
 
         public int Id { get; set; }
 
-        public int TagsCounter { get; set; }
-
         [Required]
         [StringLength(50)]
         public string Name { get; set; }

@@ -49,7 +49,7 @@ namespace PletiTedyPleti.Controllers
         public ActionResult Create([Bind(Include = "Id,Category,Title,Body,Date,LikeCounter")] Post post)
         {
             if (ModelState.IsValid)
-            {;
+            {
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
