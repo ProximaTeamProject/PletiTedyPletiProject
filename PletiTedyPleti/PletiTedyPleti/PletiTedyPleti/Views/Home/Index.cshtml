@@ -3,22 +3,42 @@
 }
 @model List<PletiTedyPleti.Models.Post>
 
-<div class="jumbotron">
-    <h1>Плети Теди Плети</h1>
-    <p class="lead">Здравейте приятели и бъдещи приятели! Това е мястото да си поръчате уникални плетени нещица специално за вас или за ваш приятел.</p>
-    <p><a href="/Home/About" class="btn btn-primary btn-lg">Научи още &raquo;</a></p>
-</div>
 
-<div class="row">
-    @foreach (var post in Model)
-    {
-    <div class="col-md-4">
-        <h2>@post.Title</h2>
-        <div>
-            <i>Публикувано на @post.Date</i>
-        </div>
-        <p>@PletiTedyPleti.Classes.Utils.CutText(post.Body,80)</p>
+
+<main>
+    <div class="jumbotron">
+        <h1>Плети Теди Плети</h1>
+        <p class="lead">Здравейте приятели и бъдещи приятели! Това е мястото да си поръчате уникални плетени нещица специално за вас или за ваш приятел.</p>
+        <p><a href="/Home/About" class="btn btn-primary btn-lg">Научи още &raquo;</a>
+        </p>
     </div>
-    }
-</div>
+
+    <aside class="menu">
+        <span class="asideHeader">Последни публикации</span>
+        <ul>
+            @foreach (var post in Model)
+            {
+                <li>
+                    <a href="/Posts/Details/@post.Id">@post.Title</a>
+                </li>
+            }
+        </ul>
+    </aside>
+
+    <div class="row">
+        @foreach (var post in Model)
+        {
+            <div class="col-md-3">
+                <h2>@post.Title</h2>
+                <div>
+                    <i>Публикувано на @post.Date</i>
+                </div>
+                <p>@PletiTedyPleti.Classes.Utils.CutText(post.Body, 80)</p>
+            </div>
+        }
+    </div>
+
+</main>
+
+
 

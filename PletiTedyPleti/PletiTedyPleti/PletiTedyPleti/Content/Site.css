@@ -25,3 +25,45 @@ select,
 textarea {
     max-width: 280px;
 }
+
+    .asideHeader {
+        font-weight: bold;
+        margin-left: 15px;
+
+    }
+
+.menu {
+    display: inline-block;
+    background: beige;
+    margin-right: 10px;
+    width: 200px;
+    height: 150px;
+    float: left;
+}
+
+
+    .menu a {
+        display: block;
+        line-height: 15px;
+        text-align: left;
+        height: 15px;
+        margin-right: 5px;
+        margin-top: 5px;
+        text-decoration: none;
+        color: brown;
+    }
+
+
+
+    .menu a:hover {
+        text-decoration: underline;
+
+    }
+
+    .menu ul {
+        margin-left: -15px;
+        margin-top: 15px;
+
+    }
+
+
