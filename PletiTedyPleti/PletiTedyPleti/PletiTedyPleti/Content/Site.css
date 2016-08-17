@@ -34,7 +34,7 @@ textarea {
 
 .menu {
     display: inline-block;
-    background: beige;
+    background: white;
     margin-right: 10px;
     width: 200px;
     height: 150px;
@@ -63,7 +63,11 @@ textarea {
     .menu ul {
         margin-left: -15px;
         margin-top: 15px;
-
     }
+
+    a {
+        color: inherit;
+    }
+
 
 

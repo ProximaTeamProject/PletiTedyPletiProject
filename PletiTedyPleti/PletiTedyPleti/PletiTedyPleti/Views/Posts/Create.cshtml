@@ -4,6 +4,15 @@
     ViewBag.Title = "Create";
 }
 
+@{
+    if (IsPost)
+    {
+        string tag = Request.Form["tag"];
+
+        ViewBag.Tag = tag;
+    }
+}
+
 <h2>Create</h2>
 
 
@@ -55,20 +64,20 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+        <form method="post">
+            <div>
+                <label for="tag">Tag</label>
+                <input type="text" name="tag" value="" />
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
-        </div>
-    </div>
+        </form>
+</div>
 }
 
 <div>

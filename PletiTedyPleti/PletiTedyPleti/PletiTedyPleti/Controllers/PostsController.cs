@@ -52,6 +52,9 @@ namespace PletiTedyPleti.Controllers
             {
                 db.Posts.Add(post);
                 db.SaveChanges();
+                //db.Posts.FirstOrDefault().Tags.Add(new Tag());
+                //db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
