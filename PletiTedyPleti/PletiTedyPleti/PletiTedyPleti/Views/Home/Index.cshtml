@@ -9,7 +9,8 @@
     <div class="jumbotron">
         <h1>Плети Теди Плети</h1>
         <p class="lead">Здравейте приятели и бъдещи приятели! Това е мястото да си поръчате уникални плетени нещица специално за вас или за ваш приятел.</p>
-        <p><a href="/Home/About" class="btn btn-primary btn-lg">Научи още &raquo;</a>
+        <p>
+            <a href="/Home/About" class="btn btn-primary btn-lg">Научи още &raquo;</a>
         </p>
     </div>
 
@@ -23,16 +24,32 @@
                 </li>
             }
         </ul>
+
+        <br/>
+
+        <div class="popularTags">
+            <span class="asideHeader">Популярни тагове</span>
+
+            @foreach (var tag in ViewBag.Tags)
+            {
+                <span class="tags">
+                <a href="">@tag.Name</a>
+                </span>
+            }
+        </div>
     </aside>
-    
+
+
 
     <div class="row">
-         
+
         @foreach (var post in Model)
         {
             <div class="col-md-3">
                 <h2>@post.Category</h2>
-                <h3><a href="/Posts/Details/@post.Id">@post.Title</a></h3>
+                <h3>
+                    <a href="/Posts/Details/@post.Id">@post.Title</a>
+                </h3>
                 <div>
                     <i>@post.Images</i>
                 </div>
@@ -44,6 +61,7 @@
             </div>
         }
     </div>
+
 
 </main>
 
