@@ -1,3 +1,4 @@
+
 namespace PletiTedyPleti.Migrations
 {
     using System;

@@ -3,6 +3,7 @@
 }
 @model List<PletiTedyPleti.Models.Post>
 
+
 <div class="jumbotron">
     <h1>Плети Теди Плети</h1>
     <p class="lead">Здравейте приятели и бъдещи приятели! Това е мястото да си поръчате уникални плетени нещица специално за вас или за ваш приятел.</p>
@@ -13,11 +14,12 @@
     @foreach (var post in Model)
     {
     <div class="col-md-4">
-        <h2>@post.Title</h2>
+        <h2>@post.Category</h2>
         <div>
             Posted on<i>@post.Date</i>
         </div>
         <p>@PletiTedyPleti.Classes.Utils.CutText(post.Body,80)</p>
+        <p><a href="/Posts/Details/@post.Id">Още...</a></p>
     </div>
     }
 </div>

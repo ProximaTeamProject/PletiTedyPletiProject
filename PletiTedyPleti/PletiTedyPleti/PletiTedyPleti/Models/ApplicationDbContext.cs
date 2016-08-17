@@ -24,5 +24,7 @@ namespace PletiTedyPleti.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<PletiTedyPleti.Models.Images> Images { get; set; }
     }
 }

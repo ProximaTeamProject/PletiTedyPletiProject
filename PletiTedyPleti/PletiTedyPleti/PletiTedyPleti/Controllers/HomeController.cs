@@ -13,7 +13,7 @@ namespace PletiTedyPleti.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            var posts = db.Posts.OrderByDescending(p => p.Date).Take(3);
+            var posts = db.Posts.OrderByDescending(p => p.Category);
             return View(posts.ToList());
         }
 

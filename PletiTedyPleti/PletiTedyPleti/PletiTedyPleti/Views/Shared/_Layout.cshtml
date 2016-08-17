@@ -23,6 +23,10 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("За мен", "About", "Home")</li>
                     <li>@Html.ActionLink("Поръчка", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Категории","Category","Home")</li>
+             //here come the authorization for see this actionlink
+                    <li>@Html.ActionLink("Снимки", "Create", "Images")</li>
+                    <li>@Html.ActionLink("Постове","Create", "Posts")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

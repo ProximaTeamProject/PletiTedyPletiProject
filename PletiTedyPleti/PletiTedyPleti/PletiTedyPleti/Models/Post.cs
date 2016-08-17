@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace PletiTedyPleti.Models
 {
@@ -13,6 +10,7 @@ namespace PletiTedyPleti.Models
         {
             this.Comments = new HashSet<Comment>();
             this.Tags = new HashSet<Tag>();
+            this.Images = new HashSet<Images>();
             this.Date = DateTime.Now;
         }
 
@@ -40,5 +38,7 @@ namespace PletiTedyPleti.Models
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }
+
+        public virtual ICollection<Images> Images { get; set; }
     }
 }
