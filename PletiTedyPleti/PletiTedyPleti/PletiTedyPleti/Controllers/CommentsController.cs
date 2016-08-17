@@ -17,7 +17,7 @@ namespace PletiTedyPleti.Controllers
         // GET: Comments
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Post);
+            var comments = db.Comments.Include(c => c.Posts);
             return View(comments.ToList());
         }
 

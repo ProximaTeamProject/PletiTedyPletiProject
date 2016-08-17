@@ -10,7 +10,7 @@ namespace PletiTedyPleti.Models
     {
         public Images()
         {
-            this.Post = new HashSet<Post>();
+            Post = new HashSet<Post>();
         }
 
         [Key]
