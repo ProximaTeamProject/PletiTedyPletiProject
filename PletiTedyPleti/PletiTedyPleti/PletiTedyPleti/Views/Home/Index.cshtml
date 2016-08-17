@@ -24,15 +24,23 @@
             }
         </ul>
     </aside>
+    
 
     <div class="row">
+         
         @foreach (var post in Model)
         {
             <div class="col-md-3">
                 <h2>@post.Category</h2>
+                <h3><a href="/Posts/Details/@post.Id">@post.Title</a></h3>
                 <div>
                     <i>@post.Images</i>
                 </div>
+
+                <p>
+                    @PletiTedyPleti.Classes.Utils.CutText(post.Body, 80)
+
+                </p>
             </div>
         }
     </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace PletiTedyPleti.Models
 {
@@ -9,8 +10,9 @@ namespace PletiTedyPleti.Models
         public Post()
         {
             this.Comments = new HashSet<Comment>();
-            this.Tags = new HashSet<Tag>();
             this.Images = new HashSet<Images>();
+            this.Tags.Add(new Tag());
+            this.Tags.FirstOrDefault().Name = "Yesss";
             this.Date = DateTime.Now;
         }
 
