@@ -1,6 +1,7 @@
-﻿jumbotron{
-    background-color:greenyellow;
+﻿jumbotron {
+    background-color: greenyellow;
 }
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -26,11 +27,10 @@ textarea {
     max-width: 280px;
 }
 
-    .asideHeader {
-        font-weight: bold;
-        margin-left: 15px;
-
-    }
+.asideHeader {
+    font-weight: bold;
+    margin-left: 15px;
+}
 
 .menu {
     display: inline-block;
@@ -53,21 +53,38 @@ textarea {
         color: brown;
     }
 
-
-
-    .menu a:hover {
-        text-decoration: underline;
-
-    }
+        .menu a:hover {
+            text-decoration: underline;
+        }
 
     .menu ul {
         margin-left: -15px;
         margin-top: 15px;
     }
 
-    a {
-        color: inherit;
+.row a {
+    color: inherit;
+}
+
+.tags a {
+    color: inherit;
+    margin-top: 5px;
+    background: #fff;
+    display: inline-block;
+    margin: 0 5px 5px 0;
+    padding: 8px 14px;
+    font-size: 13px;
+    background-color: beige;
+    line-height: 100%;
+    border-radius: 16px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+    .tags a:hover {
+        text-decoration: none;
+        border-color: blue;
+        border-radius: 12px;
+        border-style: none;
+        background-color: green;
     }
-
-
-

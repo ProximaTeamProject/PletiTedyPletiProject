@@ -13,6 +13,8 @@ namespace PletiTedyPleti.Models
         {
             this.Comments = new HashSet<Comment>();
             this.Tags = new HashSet<Tag>();
+            this.Tags.Add(new Tag());
+            this.Tags.FirstOrDefault().Name = "Yesss";
             this.Date = DateTime.Now;
         }
 
