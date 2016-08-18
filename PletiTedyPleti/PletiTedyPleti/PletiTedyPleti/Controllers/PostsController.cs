@@ -35,6 +35,8 @@ namespace PletiTedyPleti.Controllers
             return View(post);
         }
 
+
+
         // GET: Posts/Create
         public ActionResult Create()
         {
@@ -51,7 +53,7 @@ namespace PletiTedyPleti.Controllers
             if (ModelState.IsValid)
             {
                 db.Posts.Add(post);
-                //db.Tags.Add(post.Tags.FirstOrDefault());
+                //db..Add(post.Tags.FirstOrDefault());
                 db.SaveChanges();
                 //db.Posts.FirstOrDefault().Tags.Add(new Tag());
                 //db.SaveChanges();

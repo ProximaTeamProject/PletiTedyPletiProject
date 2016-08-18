@@ -13,7 +13,7 @@ namespace PletiTedyPleti.Models
             this.Images = new HashSet<Images>();
             this.Tags = new HashSet<Tag>();
             this.Tags.Add(new Tag());
-            this.Tags.FirstOrDefault().Name = "Yesss";
+            this.Tags.FirstOrDefault().Name = "TheBest";
             this.Date = DateTime.Now;
         }
 

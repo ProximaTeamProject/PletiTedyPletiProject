@@ -33,7 +33,8 @@
             @foreach (var tag in ViewBag.Tags)
             {
                 <span class="tags">
-                <a href="">@tag.Name</a>
+
+                <a href="/Home/DisplayTagSearchResults/@tag.Id">@tag.Name</a>
                 </span>
             }
         </div>

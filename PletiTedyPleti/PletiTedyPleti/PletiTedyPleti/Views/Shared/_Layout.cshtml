@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - PleriTediPleti</title>
+    <title>@ViewBag.Title - PletiTediPleti</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -24,12 +24,13 @@
                     <li>@Html.ActionLink("За мен", "About", "Home")</li>
                     <li>@Html.ActionLink("Галерия", "Index", "Posts")</li>
                     <li>@Html.ActionLink("Поръчка", "Contact", "Home")</li>
-             //here come the authorization for see this actionlink
+                    //here come the authorization for see this actionlink
                     <li>@Html.ActionLink("foto", "Create", "Images")</li>
-                    <li>@Html.ActionLink("posts","Create", "Posts")</li>
+                    <li>@Html.ActionLink("posts", "Create", "Posts")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
+
         </div>
     </div>
     <div class="container body-content">

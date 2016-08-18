@@ -58,7 +58,7 @@
             @foreach (var tag in Model.Tags)
             {
                 <span class="tags">
-                    <a href="">@tag.Name </a>
+                    <a href="/Home/DisplayTagSearchResults/@tag.Id">@tag.Name</a>
                 </span>
             }
         </dd>

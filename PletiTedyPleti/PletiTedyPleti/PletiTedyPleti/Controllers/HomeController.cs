@@ -13,8 +13,10 @@ namespace PletiTedyPleti.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
+
             var posts = db.Posts.OrderByDescending(p => p.Category);
             var tags = db.Tags.ToList();
+            
             ViewBag.Tags = tags;
             return View(posts.ToList());
         }
@@ -26,6 +28,24 @@ namespace PletiTedyPleti.Controllers
             return View();
         }
 
+        public ActionResult DisplayTagSearchResults(int? id)
+        {
+            List<Post> searchResults = new List<Post>();
+
+            foreach (var post in db.Posts.ToList())
+            {
+                foreach (var tag in post.Tags)
+                {
+                    if (tag.Id == id)
+                    {
+                        searchResults.Add(post);
+                    }
+
+                }
+
+            }
+            return View(searchResults);
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
