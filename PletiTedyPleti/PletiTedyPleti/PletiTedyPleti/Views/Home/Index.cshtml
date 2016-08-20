@@ -3,8 +3,6 @@
 }
 @model List<PletiTedyPleti.Models.Post>
 
-
-
 <main>
     <div class="jumbotron">
         <h1>Плети Теди Плети</h1>
@@ -39,30 +37,21 @@
             }
         </div>
     </aside>
-
-
-
+    
     <div class="row">
 
-        @foreach (var post in Model)
+        @foreach (var category in ViewBag.Categories)
         {
             <div class="col-md-3">
-                <h2>@post.Category</h2>
-                <h3>
-                    <a href="/Posts/Details/@post.Id">@post.Title</a>
-                </h3>
+                <h2>
+                    <a href="~/Views/Categories/@category.Id">@category.name</a>
+                </h2>
                 <div>
-                    <i>@post.Images</i>
+                    <img src="@category.adress"/>
                 </div>
-
-                <p>
-                    @PletiTedyPleti.Classes.Utils.CutText(post.Body, 80)
-
-                </p>
             </div>
         }
     </div>
-
 
 </main>
 

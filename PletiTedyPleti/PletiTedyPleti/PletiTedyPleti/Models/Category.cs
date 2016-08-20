@@ -6,9 +6,9 @@ using System.Web;
 
 namespace PletiTedyPleti.Models
 {
-    public class Images
+    public class Category
     {
-        public Images()
+        public Category()
         {
             Post = new HashSet<Post>();
         }
@@ -23,5 +23,6 @@ namespace PletiTedyPleti.Models
         public string adress { get; set; }
 
         public virtual ICollection<Post> Post { get; set; }
+
     }
 }

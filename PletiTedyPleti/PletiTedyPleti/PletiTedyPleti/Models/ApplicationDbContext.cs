@@ -26,5 +26,7 @@ namespace PletiTedyPleti.Models
         }
 
         public System.Data.Entity.DbSet<PletiTedyPleti.Models.Images> Images { get; set; }
+
+        public System.Data.Entity.DbSet<PletiTedyPleti.Models.Category> Categories { get; set; }
     }
 }

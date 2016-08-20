@@ -1,5 +1,5 @@
-﻿jumbotron {
-    background-color: greenyellow;
+﻿.jumbotron {
+   background-image: url("/img/alpine/alpine1.jpg");
 }
 
 body {

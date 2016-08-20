@@ -1,7 +1,7 @@
-﻿@model IEnumerable<PletiTedyPleti.Models.Images>
+﻿@model IEnumerable<PletiTedyPleti.Models.Category>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Categoties = "Index";
 }
 
 <h2>Index</h2>
@@ -14,7 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.name)
         </th>
-        <a href="~/Views/Images/Index.cshtml">~/Views/Images/Index.cshtml</a>
         <th>
             @Html.DisplayNameFor(model => model.adress)
         </th>
