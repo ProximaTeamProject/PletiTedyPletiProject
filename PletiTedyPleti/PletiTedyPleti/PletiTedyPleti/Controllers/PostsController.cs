@@ -175,14 +175,21 @@ namespace PletiTedyPleti.Controllers
 
             post.Tags.Clear();
 
+            var commentsToRemove = post.Comments;
+
+            db.Comments.RemoveRange(commentsToRemove);
+
+            post.Comments.Clear();
 
             db.Posts.Remove(post);
 
             db.SaveChanges();
 
-            var a = db.Tags.Where(x => x.Posts.Count == 0).ToList();
 
-            db.Tags.RemoveRange(a);
+            var TagsWithoutPosts = db.Tags.Where(x => x.Posts.Count == 0).ToList();
+
+            db.Tags.RemoveRange(TagsWithoutPosts);
+
 
             db.SaveChanges();
 
