@@ -10,6 +10,14 @@ using PletiTedyPleti.Models;
 
 namespace PletiTedyPleti.Controllers
 {
+
+    public class Combination
+    {
+        public IEnumerable<Comment> CommentsCollection { get; set; }
+        public Post Post { get; set; }
+
+    }
+
     public class PostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -32,7 +40,16 @@ namespace PletiTedyPleti.Controllers
             {
                 return HttpNotFound();
             }
-            return View(post);
+
+            Combination combinationModel = new Combination();
+
+            List<Comment> commentsCollection = db.Comments.Where(x=>x.Posts.Id == post.Id).Include(y=>y.Author).ToList();
+
+            combinationModel.CommentsCollection = commentsCollection;
+
+            combinationModel.Post = post;
+
+            return View(combinationModel);
         }
 
         public ActionResult DisplayTagSearchResults(int? id)

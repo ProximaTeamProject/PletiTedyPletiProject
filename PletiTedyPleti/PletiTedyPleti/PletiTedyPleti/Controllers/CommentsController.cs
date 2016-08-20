@@ -11,6 +11,8 @@ using PletiTedyPleti.Models;
 
 namespace PletiTedyPleti.Controllers
 {
+
+
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,9 +20,8 @@ namespace PletiTedyPleti.Controllers
         // GET: Comments
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Posts).Include(x=>x.Author);
-
-            return View(comments.ToList());
+            var comments = db.Comments.Include(c => c.Posts).Include(x=>x.Author).ToList();
+            return View(comments);
         }
 
         // GET: Comments/Details/5
