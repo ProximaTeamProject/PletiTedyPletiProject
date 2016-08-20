@@ -15,7 +15,7 @@ namespace PletiTedyPleti.Controllers
         {
 
             var posts = db.Posts.OrderByDescending(p => p.Category);
-            var tags = db.Tags.ToList();
+            var tags = db.Tags.OrderByDescending(x=>x.Posts.Count).ToList();
             var category = db.Categories;
 
             ViewBag.Tags = tags;
@@ -30,24 +30,6 @@ namespace PletiTedyPleti.Controllers
             return View();
         }
 
-        public ActionResult DisplayTagSearchResults(int? id)
-        {
-            List<Post> searchResults = new List<Post>();
-
-            foreach (var post in db.Posts.ToList())
-            {
-                foreach (var tag in post.Tags)
-                {
-                    if (tag.Id == id)
-                    {
-                        searchResults.Add(post);
-                    }
-
-                }
-
-            }
-            return View(searchResults);
-        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

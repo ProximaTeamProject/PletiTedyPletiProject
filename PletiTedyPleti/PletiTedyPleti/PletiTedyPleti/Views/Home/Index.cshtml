@@ -27,12 +27,16 @@
 
         <div class="popularTags">
             <span class="asideHeader">Популярни тагове</span>
+            <br/>
 
             @foreach (var tag in ViewBag.Tags)
             {
                 <span class="tags">
-
-                <a href="/Home/DisplayTagSearchResults/@tag.Id">@tag.Name</a>
+                    
+                   @if (!string.IsNullOrEmpty(tag.Name))
+                   {
+                    <a href="/Posts/DisplayTagSearchResults/@tag.Id">@tag.Name</a>
+                   }
                 </span>
             }
         </div>
