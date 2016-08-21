@@ -12,8 +12,6 @@ namespace PletiTedyPleti.Models
             this.Comments = new HashSet<Comment>();
             this.Images = new HashSet<Images>();
             this.Tags = new HashSet<Tag>();
-            this.Tags.Add(new Tag());
-            this.Tags.FirstOrDefault().Name = "TheBest";
             this.Date = DateTime.Now;
         }
 
@@ -31,6 +29,10 @@ namespace PletiTedyPleti.Models
         [Required]
         [DataType(DataType.MultilineText)]
         public string Body { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        public string TagsRaw { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

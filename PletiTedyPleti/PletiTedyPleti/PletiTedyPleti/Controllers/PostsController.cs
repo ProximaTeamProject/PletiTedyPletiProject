@@ -35,6 +35,25 @@ namespace PletiTedyPleti.Controllers
             return View(post);
         }
 
+        public ActionResult DisplayTagSearchResults(int? id)
+        {
+            List<Post> searchResults = new List<Post>();
+
+            foreach (var post in db.Posts.ToList())
+            {
+                foreach (var tag in post.Tags)
+                {
+                    if (tag.Id == id)
+                    {
+                        searchResults.Add(post);
+                    }
+
+                }
+
+            }
+            return View(searchResults);
+        }
+
 
 
         // GET: Posts/Create
@@ -48,20 +67,57 @@ namespace PletiTedyPleti.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Category,Title,Body,Date,LikeCounter")] Post post)
+        public ActionResult Create([Bind(Include = "Id,Category,Title,Body,Date,LikeCounter,TagsRaw")] Post post)
         {
             if (ModelState.IsValid)
             {
+                List<Tag> tagsToAdd = DefineTags(db, post);
+
+                foreach (var tag in tagsToAdd)
+                {
+                    post.Tags.Add(tag);
+                }
+
                 db.Posts.Add(post);
-                //db..Add(post.Tags.FirstOrDefault());
                 db.SaveChanges();
-                //db.Posts.FirstOrDefault().Tags.Add(new Tag());
-                //db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
             return View(post);
+        }
+
+        private List<Tag> DefineTags(ApplicationDbContext db, Post post)
+        {
+            List<string> tagsNames = post.TagsRaw.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            List<Tag> tagsCollection = new List<Tag>();
+
+            foreach (var element in tagsNames)
+            {
+                Tag newTag;
+
+                if (db.Tags.Any(x => x.Name == element))
+                {
+                    newTag = db.Tags.FirstOrDefault(x => x.Name == element);
+                }
+                else
+                {
+                    newTag = new Tag()
+                    {
+                        Name = element,
+                    };
+
+                    db.Tags.Add(newTag);
+
+                    db.SaveChanges();
+                }
+
+
+                tagsCollection.Add(newTag);
+            }
+
+            return tagsCollection;
         }
 
         // GET: Posts/Edit/5
@@ -116,8 +172,27 @@ namespace PletiTedyPleti.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Post post = db.Posts.Find(id);
+
+            post.Tags.Clear();
+
+            var commentsToRemove = post.Comments;
+
+            db.Comments.RemoveRange(commentsToRemove);
+
+            post.Comments.Clear();
+
             db.Posts.Remove(post);
+
             db.SaveChanges();
+
+
+            var TagsWithoutPosts = db.Tags.Where(x => x.Posts.Count == 0).ToList();
+
+            db.Tags.RemoveRange(TagsWithoutPosts);
+
+
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
