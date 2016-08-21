@@ -15,7 +15,7 @@ namespace PletiTedyPleti.Controllers
         {
 
             var posts = db.Posts.OrderByDescending(p => p.Category);
-            var tags = db.Tags.OrderByDescending(x=>x.Posts.Count).ToList();
+            var tags = db.Tags.ToList();
             var category = db.Categories;
 
             ViewBag.Tags = tags;
