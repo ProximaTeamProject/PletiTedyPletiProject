@@ -45,19 +45,15 @@
     <div class="row">
 
         @foreach (var category in ViewBag.Categories)
-        {
+        {  
             <div class="col-md-3">
-                <h2>
-                    <a href="~/Views/Categories/@category.Id">@category.name</a>
-                </h2>
-                <div>
-                    <img src="@category.adress"/>
-                </div>
+            <h2>
+                <a href="~/Categories/Details/@category.Id">@category.name</a>
+            </h2>
+            <div>
+                <img src="@category.adress" />
             </div>
+        </div>
         }
     </div>
-
 </main>
-
-
-

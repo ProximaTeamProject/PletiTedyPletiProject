@@ -6,10 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PletiTedyPleti.Models;
 
 namespace PletiTedyPleti.Controllers
 {
+
+
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,8 +20,8 @@ namespace PletiTedyPleti.Controllers
         // GET: Comments
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Posts);
-            return View(comments.ToList());
+            var comments = db.Comments.Include(c => c.Posts).Include(x=>x.Author).ToList();
+            return View(comments);
         }
 
         // GET: Comments/Details/5
@@ -52,6 +55,11 @@ namespace PletiTedyPleti.Controllers
         {
             if (ModelState.IsValid)
             {
+                string currentUserId = User.Identity.GetUserId();
+                ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
+
+                comment.Author = currentUser;
                 db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
