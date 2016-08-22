@@ -42,7 +42,7 @@ namespace PletiTedyPleti.Controllers
 
             Combination combinationModel = new Combination();
 
-            List<Comment> commentsCollection = db.Comments.Where(x=>x.Posts.Id == post.Id).Include(y=>y.Author).ToList();
+            List<Comment> commentsCollection = db.Comments.Where(x=>x.Posts.Id == post.Id).Include(y=>y.Author).Include(x=>x.AuthorOfLastChange).ToList();
 
             combinationModel.CommentsCollection = commentsCollection;
 

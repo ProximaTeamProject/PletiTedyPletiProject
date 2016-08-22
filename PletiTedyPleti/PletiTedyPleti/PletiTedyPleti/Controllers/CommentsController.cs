@@ -119,9 +119,15 @@ namespace PletiTedyPleti.Controllers
 
                 comment.Author = currentUser;
 
+
+
                 db.Entry(comment).State = EntityState.Modified;
 
+                comment.TimeOfLastChange = DateTime.Now;
+                comment.AuthorOfLastChange = currentUser;
+
                 db.SaveChanges();
+
                 return RedirectToAction("Details", "Posts", new { id = comment.PostId });
             }
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Category", comment.PostId);

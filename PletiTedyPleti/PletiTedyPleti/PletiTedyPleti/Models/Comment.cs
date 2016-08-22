@@ -10,9 +10,12 @@ namespace PletiTedyPleti.Models
 {
     public class Comment
     {
+        public static int counter = 1;
+
         public Comment()
         {
             this.Date = DateTime.Now;
+            this.TimeOfLastChange = DateTime.Now;
         }
 
         [Key]
@@ -24,15 +27,16 @@ namespace PletiTedyPleti.Models
 
         public int PostId { get; set; }
 
-        public ApplicationUser Author { get; set; }
-
-
-
         [Required]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
+        public DateTime TimeOfLastChange { get; set; }
+
         public Post Posts { get; set; }
 
+        public ApplicationUser Author { get; set; }
+
+        public ApplicationUser AuthorOfLastChange { get; set; }
     }
 }

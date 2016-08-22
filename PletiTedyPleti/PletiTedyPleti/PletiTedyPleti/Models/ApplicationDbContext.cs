@@ -20,6 +20,7 @@ namespace PletiTedyPleti.Models
         public DbSet<Tag> Tags { get; set; }
 
 
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

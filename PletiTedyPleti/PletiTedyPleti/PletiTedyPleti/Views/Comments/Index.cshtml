@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using Microsoft.Ajax.Utilities
+@using Microsoft.AspNet.Identity
 @model PletiTedyPleti.Controllers.Combination
 
 @{
@@ -25,7 +26,13 @@
         </div>
         <div>
             @Html.DisplayFor(modelItem => item.Body)
-
+            <br/>
+            <br/>
+            @if (item.AuthorOfLastChange != null)
+            {
+                <span><i>Последна промяна направена на @item.TimeOfLastChange от @item.AuthorOfLastChange.UserName</i></span>
+                
+            }
 
 
         </div>
