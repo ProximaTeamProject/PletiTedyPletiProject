@@ -31,5 +31,6 @@ namespace PletiTedyPleti.Models
         public DateTime Date { get; set; }
 
         public Post Posts { get; set; }
+
     }
 }
