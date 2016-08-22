@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@model IEnumerable<PletiTedyPleti.Models.Comment>
+@model PletiTedyPleti.Controllers.Combination
 
 @{
     ViewBag.Title = "Index";
@@ -9,12 +9,12 @@
 
 <span>
     @*@Html.Partial("~/Views/Comments/Create.cshtml");*@
-
-    @Html.ActionLink("Добави коментар", "Create", "Comments")
+   
+    @Html.ActionLink("Добави коментар", "Create", "Comments", new {id = Model.Post.Id}, null)
 </span>
 
 <div class="table">
-    @foreach (var item in Model)
+    @foreach (var item in Model.CommentsCollection)
     {
         <br/>
         <div><span><i>Автор: </i></span>@if (item.Author != null)
@@ -25,6 +25,9 @@
         </div>
         <div>
             @Html.DisplayFor(modelItem => item.Body)
+
+
+
         </div>
         <div>
             @if (User.IsInRole("Administrators") || (item.Author != null && User.Identity.GetUserId() == item.Author.Id))

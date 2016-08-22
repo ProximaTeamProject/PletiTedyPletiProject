@@ -15,13 +15,19 @@ namespace PletiTedyPleti.Controllers
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        
+
         // GET: Comments
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-           
-            var comments = db.Comments.Include(c => c.Posts).Include(x=>x.Author).ToList();
-            return View(comments);
+            Combination commentsViewCombination = new Combination();
+
+            var comments = db.Comments.Include(c => c.Posts).Include(x => x.Author).Where(y=>y.PostId==id).ToList();
+            Post post = db.Posts.FirstOrDefault(x => x.Id == id);
+
+            commentsViewCombination.CommentsCollection = comments;
+            commentsViewCombination.Post = post;
+
+            return View(commentsViewCombination);
         }
 
         // GET: Comments/Details/5
@@ -42,9 +48,13 @@ namespace PletiTedyPleti.Controllers
 
         // GET: Comments/Create
         [Authorize]
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Category");
+            var post = db.Posts.Where(x => x.Id == id);
+
+            ViewBag.PostId = new SelectList(post, "Id", "Title");
+            ViewBag.PostIdNumber = post.FirstOrDefault().Id;
+
             return View();
         }
 
@@ -103,9 +113,16 @@ namespace PletiTedyPleti.Controllers
         {
             if (ModelState.IsValid)
             {
+                string currentUserId = User.Identity.GetUserId();
+                ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
+
+                comment.Author = currentUser;
+
                 db.Entry(comment).State = EntityState.Modified;
+
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Posts", new { id = comment.PostId });
             }
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Category", comment.PostId);
             return View(comment);
@@ -136,7 +153,8 @@ namespace PletiTedyPleti.Controllers
             Comment comment = db.Comments.Find(id);
             db.Comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Posts", new { id = comment.PostId });
+
         }
 
         protected override void Dispose(bool disposing)

@@ -15,7 +15,6 @@ namespace PletiTedyPleti.Controllers
     {
         public IEnumerable<Comment> CommentsCollection { get; set; }
         public Post Post { get; set; }
-
     }
 
     public class PostsController : Controller
