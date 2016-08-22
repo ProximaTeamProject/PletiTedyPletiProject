@@ -31,7 +31,8 @@ namespace PletiTedyPleti.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
+            Comment comment = db.Comments.Include(y => y.Author).FirstOrDefault(x => x.Id == id);
+
             if (comment == null)
             {
                 return HttpNotFound();
@@ -58,8 +59,6 @@ namespace PletiTedyPleti.Controllers
             {
                 string currentUserId = User.Identity.GetUserId();
                 ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-
-
                 comment.Author = currentUser;
                 db.Comments.Add(comment);
                 db.SaveChanges();
@@ -119,7 +118,9 @@ namespace PletiTedyPleti.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
+
+            Comment comment = db.Comments.Include(y => y.Author).FirstOrDefault(x => x.Id == id);
+
             if (comment == null)
             {
                 return HttpNotFound();

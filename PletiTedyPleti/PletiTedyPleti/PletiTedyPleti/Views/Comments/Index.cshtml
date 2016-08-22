@@ -19,7 +19,8 @@
         <br/>
         <div><span><i>Автор: </i></span>@if (item.Author != null)
                                         {
-                                            @item.Author.FullName;
+                                            @item.Author.FullName
+                                            ;
                                         },<i> <span>Публикувано на: @item.Date</span></i>
         </div>
         <div>
@@ -28,11 +29,11 @@
         <div>
             @if (User.IsInRole("Administrators") || (item.Author != null && User.Identity.GetUserId() == item.Author.Id))
             {
-                @Html.ActionLink("Edit", "Edit", "Comments", new { id = item.Id }, null)
-                @:| @Html.ActionLink("Delete", "Delete", "Comments", new { id = item.Id }, null) |
+                @Html.ActionLink("Редактирай", "Edit", "Comments", new {id = item.Id}, null)
+                @:| @Html.ActionLink("Изтрий", "Delete", "Comments", new {id = item.Id}, null) |
             }
 
-            @Html.ActionLink("Details", "Details", "Comments", new {id = item.Id}, null) 
+            @Html.ActionLink("Детайли", "Details", "Comments", new {id = item.Id}, null)
         </div>
     }
 
