@@ -27,10 +27,8 @@ namespace PletiTedyPleti.Models
 
         public int PostId { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
-
 
         public DateTime TimeOfLastChange { get; set; }
 

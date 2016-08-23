@@ -21,7 +21,7 @@ namespace PletiTedyPleti.Controllers
         {
             Combination commentsViewCombination = new Combination();
 
-            var comments = db.Comments.Include(c => c.Posts).Include(x => x.Author).Where(y=>y.PostId==id).ToList();
+            var comments = db.Comments.Include(c => c.Posts).Include(x => x.Author).Where(y => y.PostId == id).ToList();
             Post post = db.Posts.FirstOrDefault(x => x.Id == id);
 
             commentsViewCombination.CommentsCollection = comments;
@@ -71,9 +71,19 @@ namespace PletiTedyPleti.Controllers
                 ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
                 comment.Author = currentUser;
 
+
+
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Posts", new {id = comment.PostId });
+
+                db.CreationDataTable.Add(new CreationData()
+                {
+                    CommentId = comment.Id,
+                    CreationTime = comment.Date
+                });
+
+                db.SaveChanges();
+                return RedirectToAction("Details", "Posts", new { id = comment.PostId });
 
             }
 
@@ -121,6 +131,12 @@ namespace PletiTedyPleti.Controllers
 
                 comment.TimeOfLastChange = DateTime.Now;
                 comment.AuthorOfLastChangeName = currentUser.UserName;
+
+                db.Entry(comment).State = EntityState.Modified;
+
+                db.SaveChanges();
+
+                comment.Date = db.CreationDataTable.FirstOrDefault(x => x.CommentId == comment.Id).CreationTime;
 
                 db.Entry(comment).State = EntityState.Modified;
 
