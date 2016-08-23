@@ -18,6 +18,8 @@ namespace PletiTedyPleti.Models
 
         public int CommentId { get; set; }
 
+        public int PostId { get; set; }
+
         public DateTime CreationTime { get; set; }
     }
 }

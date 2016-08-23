@@ -54,7 +54,6 @@ namespace PletiTedyPleti.Controllers
 
             ViewBag.PostId = new SelectList(post, "Id", "Title");
             ViewBag.PostIdNumber = post.FirstOrDefault().Id;
-
             return View();
         }
 
@@ -69,9 +68,7 @@ namespace PletiTedyPleti.Controllers
             {
                 string currentUserId = User.Identity.GetUserId();
                 ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-                comment.Author = currentUser;
-
-
+                comment.Author = currentUser;     
 
                 db.Comments.Add(comment);
                 db.SaveChanges();
@@ -79,11 +76,17 @@ namespace PletiTedyPleti.Controllers
                 db.CreationDataTable.Add(new CreationData()
                 {
                     CommentId = comment.Id,
-                    CreationTime = comment.Date
+                    CreationTime = comment.Date,
+                    PostId = comment.PostId
                 });
 
                 db.SaveChanges();
-                return RedirectToAction("Details", "Posts", new { id = comment.PostId });
+
+                ViewBag.PostId = new SelectList(db.Posts, "Id", "Category", comment.PostId);
+
+                ViewBag.Condition = true;
+
+                return View();
 
             }
 
@@ -120,7 +123,7 @@ namespace PletiTedyPleti.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Body,PostId,Date")] Comment comment)
+        public ActionResult Edit([Bind(Include = "Id,Body,Date")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -137,7 +140,7 @@ namespace PletiTedyPleti.Controllers
                 db.SaveChanges();
 
                 comment.Date = db.CreationDataTable.FirstOrDefault(x => x.CommentId == comment.Id).CreationTime;
-
+                comment.PostId = db.CreationDataTable.FirstOrDefault(x => x.CommentId == comment.Id).PostId;
                 db.Entry(comment).State = EntityState.Modified;
 
                 db.SaveChanges();
