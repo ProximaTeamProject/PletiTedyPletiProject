@@ -70,6 +70,7 @@ namespace PletiTedyPleti.Controllers
                 string currentUserId = User.Identity.GetUserId();
                 ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
                 comment.Author = currentUser;
+
                 db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Details", "Posts", new {id = comment.PostId });
@@ -116,15 +117,12 @@ namespace PletiTedyPleti.Controllers
                 string currentUserId = User.Identity.GetUserId();
                 ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
 
-
                 comment.Author = currentUser;
 
-
+                comment.TimeOfLastChange = DateTime.Now;
+                comment.AuthorOfLastChangeName = currentUser.UserName;
 
                 db.Entry(comment).State = EntityState.Modified;
-
-                comment.TimeOfLastChange = DateTime.Now;
-                comment.AuthorOfLastChange = currentUser;
 
                 db.SaveChanges();
 

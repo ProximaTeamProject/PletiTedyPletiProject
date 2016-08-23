@@ -31,12 +31,14 @@ namespace PletiTedyPleti.Models
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
+
         public DateTime TimeOfLastChange { get; set; }
 
         public Post Posts { get; set; }
 
         public ApplicationUser Author { get; set; }
 
-        public ApplicationUser AuthorOfLastChange { get; set; }
+        public string AuthorOfLastChangeName { get; set; }
+
     }
 }

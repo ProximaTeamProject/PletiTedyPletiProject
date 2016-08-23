@@ -34,7 +34,8 @@ namespace PletiTedyPleti.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = db.Posts.Include(y => y.Comments).FirstOrDefault(x => x.Id == id);
+
             if (post == null)
             {
                 return HttpNotFound();
@@ -42,7 +43,7 @@ namespace PletiTedyPleti.Controllers
 
             Combination combinationModel = new Combination();
 
-            List<Comment> commentsCollection = db.Comments.Where(x=>x.Posts.Id == post.Id).Include(y=>y.Author).Include(x=>x.AuthorOfLastChange).ToList();
+            List<Comment> commentsCollection = db.Comments.Where(x=>x.Posts.Id == post.Id).Include(y=>y.Author).ToList();
 
             combinationModel.CommentsCollection = commentsCollection;
 
