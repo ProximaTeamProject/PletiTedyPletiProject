@@ -18,6 +18,9 @@ namespace PletiTedyPleti.Models
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<CreationData> CreationDataTable { get; set; }
+
+
 
 
         public static ApplicationDbContext Create()

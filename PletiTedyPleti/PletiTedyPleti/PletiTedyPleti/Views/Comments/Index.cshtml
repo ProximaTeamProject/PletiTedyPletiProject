@@ -1,5 +1,6 @@
-﻿@using Microsoft.AspNet.Identity
-@model IEnumerable<PletiTedyPleti.Models.Comment>
+﻿@using Microsoft.Ajax.Utilities
+@using Microsoft.AspNet.Identity
+@model PletiTedyPleti.Controllers.Combination
 
 @{
     ViewBag.Title = "Index";
@@ -8,31 +9,43 @@
 <h2>Коментари</h2>
 
 <span>
-    @*@Html.Partial("~/Views/Comments/Create.cshtml");*@
+@{
+    Html.RenderAction("Create", "Comments", new {Id = Model.Post.Id });
+}
 
-    @Html.ActionLink("Добави коментар", "Create", "Comments")
+@Html.ActionLink("Добави коментар", "Create", "Comments", new {id = Model.Post.Id}, null)
 </span>
 
 <div class="table">
-    @foreach (var item in Model)
+    @foreach (var item in Model.CommentsCollection)
     {
         <br/>
         <div><span><i>Автор: </i></span>@if (item.Author != null)
                                         {
-                                            @item.Author.FullName;
+                                            @item.Author.UserName
+                                            ;
                                         },<i> <span>Публикувано на: @item.Date</span></i>
         </div>
         <div>
             @Html.DisplayFor(modelItem => item.Body)
+            <br/>
+            <br/>
+            @if (item.AuthorOfLastChangeName != null)
+            {
+                <span><i>Последна промяна направена на @item.TimeOfLastChange от @item.AuthorOfLastChangeName</i></span>
+                
+            }
+
+
         </div>
         <div>
             @if (User.IsInRole("Administrators") || (item.Author != null && User.Identity.GetUserId() == item.Author.Id))
             {
-                @Html.ActionLink("Edit", "Edit", "Comments", new { id = item.Id }, null)
-                @:| @Html.ActionLink("Delete", "Delete", "Comments", new { id = item.Id }, null) |
+                @Html.ActionLink("Редактирай", "Edit", "Comments", new {id = item.Id}, null)
+                @:| @Html.ActionLink("Изтрий", "Delete", "Comments", new {id = item.Id}, null) |
             }
 
-            @Html.ActionLink("Details", "Details", "Comments", new {id = item.Id}, null) 
+            @Html.ActionLink("Детайли", "Details", "Comments", new {id = item.Id}, null)
         </div>
     }
 

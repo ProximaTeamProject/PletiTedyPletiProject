@@ -15,7 +15,6 @@ namespace PletiTedyPleti.Controllers
     {
         public IEnumerable<Comment> CommentsCollection { get; set; }
         public Post Post { get; set; }
-
     }
 
     public class PostsController : Controller
@@ -35,7 +34,8 @@ namespace PletiTedyPleti.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = db.Posts.Include(y => y.Comments).FirstOrDefault(x => x.Id == id);
+
             if (post == null)
             {
                 return HttpNotFound();
@@ -88,12 +88,8 @@ namespace PletiTedyPleti.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<Tag> tagsToAdd = DefineTags(db, post);
 
-                foreach (var tag in tagsToAdd)
-                {
-                    post.Tags.Add(tag);
-                }
+                post.AddTagsToPost(db, post);
 
                 db.Posts.Add(post);
                 db.SaveChanges();
@@ -104,39 +100,7 @@ namespace PletiTedyPleti.Controllers
             return View(post);
         }
 
-        private List<Tag> DefineTags(ApplicationDbContext db, Post post)
-        {
-            List<string> tagsNames = post.TagsRaw.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            List<Tag> tagsCollection = new List<Tag>();
-
-            foreach (var element in tagsNames)
-            {
-                Tag newTag;
-
-                if (db.Tags.Any(x => x.Name == element))
-                {
-                    newTag = db.Tags.FirstOrDefault(x => x.Name == element);
-                }
-                else
-                {
-                    newTag = new Tag()
-                    {
-                        Name = element,
-                    };
-
-                    db.Tags.Add(newTag);
-
-                    db.SaveChanges();
-                }
-
-
-                tagsCollection.Add(newTag);
-            }
-
-            return tagsCollection;
-        }
-
+ 
         // GET: Posts/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -157,11 +121,16 @@ namespace PletiTedyPleti.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Category,Title,Body,Date,LikeCounter")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Category,Title,Body,Date,LikeCounter,TagsRaw")] Post post)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(post).State = EntityState.Modified;
+                post.AddTagsToPost(db, post);
+                db.SaveChanges();
+
+                CheckIfThereAreEmptyTagsAndRemoveThem();
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -203,14 +172,19 @@ namespace PletiTedyPleti.Controllers
             db.SaveChanges();
 
 
-            var TagsWithoutPosts = db.Tags.Where(x => x.Posts.Count == 0).ToList();
-
-            db.Tags.RemoveRange(TagsWithoutPosts);
+            CheckIfThereAreEmptyTagsAndRemoveThem();
 
 
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        private void CheckIfThereAreEmptyTagsAndRemoveThem()
+        {
+            var TagsWithoutPosts = db.Tags.Where(x => x.Posts.Count == 0).ToList();
+
+            db.Tags.RemoveRange(TagsWithoutPosts);
         }
 
         protected override void Dispose(bool disposing)
