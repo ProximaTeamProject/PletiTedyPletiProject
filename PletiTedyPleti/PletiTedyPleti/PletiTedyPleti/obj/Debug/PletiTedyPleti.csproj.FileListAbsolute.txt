@@ -476,7 +476,6 @@ C:\Users\ff\Documents\Repositories\5678\PletiTedyPletiProject\PletiTedyPleti\Ple
 C:\Users\ff\Documents\Repositories\5678\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.csprojResolveAssemblyReference.cache
 C:\Users\ff\Documents\Repositories\5678\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.dll
 C:\Users\ff\Documents\Repositories\5678\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.pdb
-C:\Users\Teodora\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.csprojResolveAssemblyReference.cache
 C:\Users\ff\Documents\Repositories\NewestTedy\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\bin\ApplicationInsights.config
 C:\Users\ff\Documents\Repositories\NewestTedy\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\bin\roslyn\csc.exe
 C:\Users\ff\Documents\Repositories\NewestTedy\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\bin\roslyn\csc.exe.config
@@ -573,3 +572,4 @@ C:\Users\ff\Documents\Repositories\NewestTedy\PletiTedyPletiProject\PletiTedyPle
 C:\Users\ff\Documents\Repositories\NewestTedy\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.csprojResolveAssemblyReference.cache
 C:\Users\ff\Documents\Repositories\NewestTedy\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.dll
 C:\Users\ff\Documents\Repositories\NewestTedy\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.pdb
+C:\Users\Teodora\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.csprojResolveAssemblyReference.cache
