@@ -23,7 +23,9 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("За мен", "About", "Home")</li>
                     <li>@Html.ActionLink("Галерия", "Index", "Posts")</li>
-                    <li>@Html.ActionLink("Поръчка", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Контакти", "Contact", "Home")</li>*@
+                    <li>@Html.ActionLink("Поръчки", "Index", "Orders")</li>
+                    <li>@Html.ActionLink("Нова поръчка", "Create", "Orders")</li>
                     //here come the authorization for see this actionlink
                     <li>@Html.ActionLink("foto", "Create", "Images")</li>
                     <li>@Html.ActionLink("posts", "Create", "Posts")</li>
@@ -38,7 +40,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year -Плети Теди Плети</p>
+            <p>&copy; @DateTime.Now.Year -  Плети Теди Плети</p>
         </footer>
     </div>
 

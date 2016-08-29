@@ -64,8 +64,6 @@ namespace PletiTedyPleti.Models
 
     public class RegisterViewModel
     {
-
-
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -85,6 +83,10 @@ namespace PletiTedyPleti.Models
         [Required]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
+
+       //M [Required]
+       //M [Display(Name = "FullName")]
+       //M public string FullName { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -19,7 +19,7 @@ namespace PletiTedyPleti.Migrations
 
         protected override void Seed(PletiTedyPleti.Models.ApplicationDbContext context)
         {
-            if (!context.Users.Any(x=>x.FullName == "System Administrator"))
+            if (!context.Users.Any(x=>x.UserName == "System Administrator"))
             {
                 // If the database is empty, populate sample data in it
                 CreateUser(context, "admin@gmail.com", "admin@gmail.comA123", "System Administrator");
@@ -50,13 +50,14 @@ namespace PletiTedyPleti.Migrations
             {
                 UserName = email,
                 Email = email,
-                FullName = fullName
+                //FullName = fullName
+                //UserName = fullName
             };
 
             var userCreateResult = userManager.Create(user, password);
             if (!userCreateResult.Succeeded)
             {
-                throw new Exception(string.Join("; ", userCreateResult.Errors));
+                //throw new Exception(string.Join("; ", userCreateResult.Errors));
             }
         }
 
@@ -67,7 +68,7 @@ namespace PletiTedyPleti.Migrations
             var roleCreateResult = roleManager.Create(new IdentityRole(roleName));
             if (!roleCreateResult.Succeeded)
             {
-                throw new Exception(string.Join("; ", roleCreateResult.Errors));
+                //throw new Exception(string.Join("; ", roleCreateResult.Errors));
             }
         }
 
@@ -79,7 +80,7 @@ namespace PletiTedyPleti.Migrations
             var addAdminRoleResult = userManager.AddToRole(user.Id, roleName);
             if (!addAdminRoleResult.Succeeded)
             {
-                throw new Exception(string.Join("; ", addAdminRoleResult.Errors));
+                //throw new Exception(string.Join("; ", addAdminRoleResult.Errors));
             }
         }
 
