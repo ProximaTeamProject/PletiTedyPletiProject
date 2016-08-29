@@ -76,6 +76,9 @@ namespace PletiTedyPleti.Controllers
         // GET: Posts/Create
         public ActionResult Create()
         {
+            var category = db.Categories.ToList();
+
+            ViewBag.Category = new SelectList(category, "Id", "name");
             return View();
         }
 
@@ -84,19 +87,24 @@ namespace PletiTedyPleti.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Category,Title,Body,Date,LikeCounter,TagsRaw")] Post post)
+        public ActionResult Create([Bind(Include = "Id,Category,Title,Body,Date,TagsRaw")] Post post)
         {
             if (ModelState.IsValid)
             {
 
                 post.AddTagsToPost(db, post);
-
+                post.Category = db.Categories.FirstOrDefault(x => x.Id.ToString() == post.Category).name;
                 db.Posts.Add(post);
                 db.SaveChanges();
 
+                var category = db.Categories.ToList();
+
+                ViewBag.Category = new SelectList(category, "name");
                 return RedirectToAction("Index");
             }
+            var category2 = db.Categories.ToList();
 
+            ViewBag.Category = new SelectList(category2, "Id", "name");
             return View(post);
         }
 
