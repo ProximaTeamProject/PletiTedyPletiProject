@@ -9,11 +9,8 @@
 <h2>Коментари</h2>
 
 <span>
-@{
-    Html.RenderAction("Create", "Comments", new {Id = Model.Post.Id });
-}
 
-@Html.ActionLink("Добави коментар", "Create", "Comments", new {id = Model.Post.Id}, null)
+
 </span>
 
 <div class="table">

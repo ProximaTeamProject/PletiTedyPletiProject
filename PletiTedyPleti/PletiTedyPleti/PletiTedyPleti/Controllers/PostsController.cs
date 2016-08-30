@@ -34,22 +34,23 @@ namespace PletiTedyPleti.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Include(y => y.Comments).FirstOrDefault(x => x.Id == id);
+
+            Post post = db.Posts.FirstOrDefault(x => x.Id == id);
+
 
             if (post == null)
             {
                 return HttpNotFound();
             }
 
-            Combination combinationModel = new Combination();
+            Combination commentsViewCombination = new Combination();
 
-            List<Comment> commentsCollection = db.Comments.Where(x=>x.Posts.Id == post.Id).Include(y=>y.Author).ToList();
+            var comments = db.Comments.Include(c => c.Posts).Include(x => x.Author).Where(y => y.PostId == id).ToList();
 
-            combinationModel.CommentsCollection = commentsCollection;
+            commentsViewCombination.CommentsCollection = comments;
+            commentsViewCombination.Post = post;
 
-            combinationModel.Post = post;
-
-            return View(combinationModel);
+            return View(commentsViewCombination);
         }
 
         public ActionResult DisplayTagSearchResults(int? id)

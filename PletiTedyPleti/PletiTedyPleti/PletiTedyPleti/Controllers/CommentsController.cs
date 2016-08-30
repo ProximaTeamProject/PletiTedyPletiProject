@@ -86,8 +86,15 @@ namespace PletiTedyPleti.Controllers
 
                 ViewBag.Condition = true;
 
-                return View();
+                Combination commentsViewCombination = new Combination();
 
+                var comments = db.Comments.Include(c => c.Posts).Include(x => x.Author).Where(y => y.PostId == comment.PostId).ToList();
+                Post post = db.Posts.FirstOrDefault(x => x.Id == comment.PostId);
+
+                commentsViewCombination.CommentsCollection = comments;
+                commentsViewCombination.Post = post;
+
+                return View();
             }
 
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Category", comment.PostId);
