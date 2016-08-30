@@ -14,21 +14,22 @@
 <div class="table">
     @foreach (var item in Model.CommentsCollection)
     {
-        <br/>
-        <div><span><i>Автор: </i></span>@if (item.Author != null)
-                                        {
-                                            @item.Author.UserName
-                                            ;
-                                        },<i> <span>Публикувано на: @item.Date</span></i>
+        <br />
+        <div>
+            <span><i>Автор: </i></span>@if (item.Author != null)
+            {
+                @item.Author.UserName
+                ;
+            },<i> <span>Публикувано на: @item.Date</span></i>
         </div>
         <div>
             @Html.DisplayFor(modelItem => item.Body)
-            <br/>
-            <br/>
+            <br />
+            <br />
             @if (item.AuthorOfLastChangeName != null)
             {
                 <span><i>Последна промяна направена на @item.TimeOfLastChange от @item.AuthorOfLastChangeName</i></span>
-                
+
             }
 
 
@@ -36,12 +37,14 @@
         <div>
             @if (User.IsInRole("Administrators") || (item.Author != null && User.Identity.GetUserId() == item.Author.Id))
             {
-                @Html.ActionLink("Редактирай", "Edit", "Comments", new {id = item.Id}, null)
-                @:| @Html.ActionLink("Изтрий", "Delete", "Comments", new {id = item.Id}, null) |
+                @Html.ActionLink("Редактирай", "Edit", "Comments", new { id = item.Id }, null)
+                @:| @Html.ActionLink("Изтрий", "Delete", "Comments", new { id = item.Id }, null) |
             }
 
-            @Html.ActionLink("Детайли", "Details", "Comments", new {id = item.Id}, null)
+            @Html.ActionLink("Детайли", "Details", "Comments", new { id = item.Id }, null)
         </div>
     }
 
 </div>
+
+

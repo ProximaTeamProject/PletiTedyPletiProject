@@ -21,7 +21,7 @@ namespace PletiTedyPleti.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете съдържание на коментара")]
         [DataType(DataType.MultilineText)]
         public string Body { get; set; }
 
