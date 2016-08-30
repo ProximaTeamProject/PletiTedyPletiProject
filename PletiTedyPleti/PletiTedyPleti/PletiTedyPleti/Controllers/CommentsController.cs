@@ -63,6 +63,8 @@ namespace PletiTedyPleti.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Body,PostId")] Comment comment)
         {
+            var postInACollection = db.Posts.Where(x => x.Id == comment.PostId);
+            var postAsSinglePost = postInACollection.FirstOrDefault();
 
             if (ModelState.IsValid)
             {
@@ -82,22 +84,21 @@ namespace PletiTedyPleti.Controllers
 
                 db.SaveChanges();
 
-                ViewBag.PostId = new SelectList(db.Posts, "Id", "Category", comment.PostId);
+                ViewBag.PostId = new SelectList(postInACollection, "Id", "Title");
 
                 ViewBag.Condition = true;
 
                 Combination commentsViewCombination = new Combination();
 
                 var comments = db.Comments.Include(c => c.Posts).Include(x => x.Author).Where(y => y.PostId == comment.PostId).ToList();
-                Post post = db.Posts.FirstOrDefault(x => x.Id == comment.PostId);
 
                 commentsViewCombination.CommentsCollection = comments;
-                commentsViewCombination.Post = post;
+                commentsViewCombination.Post = postAsSinglePost;
 
                 return PartialView("_CreatePartial");
             }
 
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Category", comment.PostId);
+            ViewBag.PostId = new SelectList(postInACollection, "Id", "Title");
             return PartialView("_CreatePartial", comment);
         }
 
