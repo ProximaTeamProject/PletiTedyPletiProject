@@ -20,8 +20,8 @@ namespace PletiTedyPleti.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            //View(db.Orders.Include(or => or.Author.FullName).ToList());
-            return View(db.Orders.ToList());
+            return View(db.Orders.Include(or => or.Author.UserName).ToList());
+            //return View(db.Orders.ToList());
         }
 
         // GET: Orders/Details/5

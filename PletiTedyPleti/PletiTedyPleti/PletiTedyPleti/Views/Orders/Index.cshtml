@@ -22,9 +22,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Date)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Author.FullName)
-        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Author.UserName)
+        </th>
         <th></th>
     </tr>
 
@@ -39,9 +39,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Author.FullName)
-        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Author.UserName)
+        </td>
         <td>
             @Html.ActionLink("Редактирай", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Детайли", "Details", new { id=item.Id }) |
