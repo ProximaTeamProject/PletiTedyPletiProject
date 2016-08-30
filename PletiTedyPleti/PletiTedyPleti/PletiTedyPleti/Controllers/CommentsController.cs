@@ -27,7 +27,7 @@ namespace PletiTedyPleti.Controllers
             commentsViewCombination.CommentsCollection = comments;
             commentsViewCombination.Post = post;
 
-            return View(commentsViewCombination);
+            return PartialView("_IndexPartial", commentsViewCombination);
         }
 
         // GET: Comments/Details/5
@@ -54,7 +54,7 @@ namespace PletiTedyPleti.Controllers
 
             ViewBag.PostId = new SelectList(post, "Id", "Title");
             ViewBag.PostIdNumber = post.FirstOrDefault().Id;
-            return View();
+            return PartialView("_CreatePartial");
         }
 
         // POST: Comments/Create
@@ -94,11 +94,11 @@ namespace PletiTedyPleti.Controllers
                 commentsViewCombination.CommentsCollection = comments;
                 commentsViewCombination.Post = post;
 
-                return View();
+                return PartialView("_CreatePartial");
             }
 
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Category", comment.PostId);
-            return View(comment);
+            return PartialView("_CreatePartial", comment);
         }
 
         // GET: Comments/Edit/5

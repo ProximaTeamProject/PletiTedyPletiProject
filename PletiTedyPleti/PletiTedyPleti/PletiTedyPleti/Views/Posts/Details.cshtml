@@ -77,7 +77,7 @@
 @{
     Html.RenderAction("Create", "Comments", new { Id = Model.Post.Id });
 }
-
+        <br/>
         @{
             Html.RenderAction("Index", "Comments", new { id = Model.Post.Id });
         }
