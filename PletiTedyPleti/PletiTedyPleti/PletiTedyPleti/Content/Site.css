@@ -1,7 +1,7 @@
 ﻿.jumbotron {
    background-image: url("/img/cover.jpg");
-   width: 95%;
-   height: 95%;
+   width: 1000px;
+   height: 300px;
 }
 
 .jumbotron a {
@@ -46,7 +46,7 @@ textarea {
     display: inline-block;
     background: bisque;
     margin-right: 10px;
-    margin-top: 15px;
+    padding-top: 15px;
     width: 200px;
     height: 400px;
     float: left;
@@ -110,4 +110,21 @@ textarea {
         padding: 8px 14px;
     }
 
+.about p{
+    padding-top:100px;
+    background-color: bisque;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 300px;
+    display: inline-block;
+}
+.about img{
+    align-content: flex-start;  
+     width: 250px;
+    height: 350px;
+}
 
+.detail img {
+    width: 350px;
+    height: 250px;
+}

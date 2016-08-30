@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PletiTedyPleti.Classes;
 using PletiTedyPleti.Models;
 
 namespace PletiTedyPleti.Controllers
@@ -32,7 +33,14 @@ namespace PletiTedyPleti.Controllers
             {
                 return HttpNotFound();
             }
-            return View(category);
+
+            CategoriesViewCombination viewCombination = new CategoriesViewCombination();
+
+            viewCombination.Category = category;
+            viewCombination.ImagesCollection = db.Images.ToList();
+            viewCombination.PostsCollection = db.Posts.Where(x => x.Category == category.name).ToList();
+
+            return View(viewCombination);
         }
 
         // GET: Categories/Create

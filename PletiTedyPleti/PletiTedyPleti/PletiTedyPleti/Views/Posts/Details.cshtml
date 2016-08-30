@@ -1,5 +1,6 @@
 ﻿@using System.Collections
 @using System.Web.Mvc.Html
+@using Microsoft.AspNet.Identity
 @using PletiTedyPleti.Models
 @model PletiTedyPleti.Controllers.Combination
 
@@ -68,16 +69,20 @@
     </dl>
 
     <p>
-        @Html.ActionLink("Edit", "Edit", new {id = Model.Post.Id}) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Post.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 
     <div>
 
-@{
-    Html.RenderAction("Create", "Comments", new { Id = Model.Post.Id });
-}
-        <br/>
+        @if (User.Identity.GetUserId() != null)
+        {
+            Html.RenderAction("Create", "Comments", new { Id = Model.Post.Id });
+        }
+
+
+
+        <br />
         @{
             Html.RenderAction("Index", "Comments", new { id = Model.Post.Id });
         }
@@ -88,4 +93,3 @@
 
     </div>
 </div>
-
