@@ -1,5 +1,7 @@
 ﻿.jumbotron {
    background-image: url("/img/cover.jpg");
+   width: 95%;
+   height: 95%;
 }
 
 .jumbotron a {
