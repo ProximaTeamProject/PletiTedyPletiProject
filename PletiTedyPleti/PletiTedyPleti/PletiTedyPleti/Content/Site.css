@@ -70,6 +70,10 @@ textarea {
 
 .row a {
     color: inherit;
+   }
+.row img {
+    width: 400px;
+    height: 300px;
 }
 
 .tags a {
