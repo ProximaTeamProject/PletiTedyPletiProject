@@ -27,7 +27,7 @@ namespace PletiTedyPleti.Controllers
             commentsViewCombination.CommentsCollection = comments;
             commentsViewCombination.Post = post;
 
-            return View(commentsViewCombination);
+            return PartialView("_IndexPartial", commentsViewCombination);
         }
 
         // GET: Comments/Details/5
@@ -47,14 +47,13 @@ namespace PletiTedyPleti.Controllers
         }
 
         // GET: Comments/Create
-        [Authorize]
         public ActionResult Create(int? id)
         {
             var post = db.Posts.Where(x => x.Id == id);
 
             ViewBag.PostId = new SelectList(post, "Id", "Title");
             ViewBag.PostIdNumber = post.FirstOrDefault().Id;
-            return View();
+            return PartialView("_CreatePartial");
         }
 
         // POST: Comments/Create
@@ -64,11 +63,12 @@ namespace PletiTedyPleti.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Body,PostId")] Comment comment)
         {
+
             if (ModelState.IsValid)
             {
                 string currentUserId = User.Identity.GetUserId();
                 ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-                comment.Author = currentUser;     
+                comment.Author = currentUser;
 
                 db.Comments.Add(comment);
                 db.SaveChanges();
@@ -86,12 +86,19 @@ namespace PletiTedyPleti.Controllers
 
                 ViewBag.Condition = true;
 
-                return View();
+                Combination commentsViewCombination = new Combination();
 
+                var comments = db.Comments.Include(c => c.Posts).Include(x => x.Author).Where(y => y.PostId == comment.PostId).ToList();
+                Post post = db.Posts.FirstOrDefault(x => x.Id == comment.PostId);
+
+                commentsViewCombination.CommentsCollection = comments;
+                commentsViewCombination.Post = post;
+
+                return PartialView("_CreatePartial");
             }
 
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Category", comment.PostId);
-            return View(comment);
+            return PartialView("_CreatePartial", comment);
         }
 
         // GET: Comments/Edit/5

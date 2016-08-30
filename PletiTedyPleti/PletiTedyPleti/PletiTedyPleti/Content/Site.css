@@ -68,6 +68,11 @@ textarea {
         margin-top: 15px;
     }
 
+    .best {
+        width: 20000px;
+        height: 10000px;
+    }
+
 .row a {
     color: inherit;
    }

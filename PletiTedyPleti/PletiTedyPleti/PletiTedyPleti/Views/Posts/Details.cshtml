@@ -73,7 +73,14 @@
     </p>
 
     <div>
-        @Html.Partial("~/Views/Comments/Index.cshtml", Model);
+
+@{
+    Html.RenderAction("Create", "Comments", new { Id = Model.Post.Id });
+}
+        <br/>
+        @{
+            Html.RenderAction("Index", "Comments", new { id = Model.Post.Id });
+        }
 
     </div>
 
