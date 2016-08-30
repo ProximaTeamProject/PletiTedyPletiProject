@@ -764,7 +764,6 @@ C:\Users\MILENA\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyP
 C:\Users\MILENA\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\MILENA\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.dll
 C:\Users\MILENA\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.pdb
-C:\Users\MILENA\Documents\GitHub\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\obj\Debug\PletiTedyPleti.csprojResolveAssemblyReference.cache
 C:\Users\ff\Documents\Repositories\RepoFolder\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\bin\ApplicationInsights.config
 C:\Users\ff\Documents\Repositories\RepoFolder\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\bin\roslyn\csc.exe
 C:\Users\ff\Documents\Repositories\RepoFolder\PletiTedyPletiProject\PletiTedyPleti\PletiTedyPleti\PletiTedyPleti\bin\roslyn\csc.exe.config

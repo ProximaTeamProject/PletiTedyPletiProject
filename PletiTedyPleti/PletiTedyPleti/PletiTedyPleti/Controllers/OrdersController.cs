@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PletiTedyPleti.Models;
+using System.Web.Security;
 
 namespace PletiTedyPleti.Controllers
 {
@@ -15,12 +16,15 @@ namespace PletiTedyPleti.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Orders
+        //[Authorize]
         public ActionResult Index()
         {
+            //View(db.Orders.Include(or => or.Author.FullName).ToList());
             return View(db.Orders.ToList());
         }
 
         // GET: Orders/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +40,7 @@ namespace PletiTedyPleti.Controllers
         }
 
         // GET: Orders/Create
+        [Authorize]        
         public ActionResult Create()
         {
             return View();
@@ -45,11 +50,15 @@ namespace PletiTedyPleti.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Description,Size,Date")] Order order)
+        //to return Date as orig Bind(Include = "Id,Description,Size, Date")
+        //do not return Date
+        public ActionResult Create([Bind(Include = "Id,Description,Size")] Order order)
         {
             if (ModelState.IsValid)
             {
+                order.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -59,6 +68,8 @@ namespace PletiTedyPleti.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize(Roles = "Administrators")]
+        //[Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,6 +88,7 @@ namespace PletiTedyPleti.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Description,Size,Date")] Order order)
         {
@@ -90,6 +102,7 @@ namespace PletiTedyPleti.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -106,6 +119,7 @@ namespace PletiTedyPleti.Controllers
 
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

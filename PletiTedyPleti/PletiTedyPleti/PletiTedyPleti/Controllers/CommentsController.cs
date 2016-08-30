@@ -47,7 +47,6 @@ namespace PletiTedyPleti.Controllers
         }
 
         // GET: Comments/Create
-        [Authorize]
         public ActionResult Create(int? id)
         {
             var post = db.Posts.Where(x => x.Id == id);
@@ -64,11 +63,12 @@ namespace PletiTedyPleti.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Body,PostId")] Comment comment)
         {
+
             if (ModelState.IsValid)
             {
                 string currentUserId = User.Identity.GetUserId();
                 ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-                comment.Author = currentUser;     
+                comment.Author = currentUser;
 
                 db.Comments.Add(comment);
                 db.SaveChanges();
