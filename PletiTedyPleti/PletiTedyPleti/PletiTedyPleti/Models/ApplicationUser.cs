@@ -17,7 +17,7 @@ namespace PletiTedyPleti.Models
         public string FullName { get; set; }
 
         //[StringLength(100)]
-       //  public string UserName { get; set; }
+        //public string UserName { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
