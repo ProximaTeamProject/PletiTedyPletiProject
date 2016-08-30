@@ -8,6 +8,11 @@ namespace PletiTedyPleti.Models
 {
     public class Order
     {
+
+        public Order()
+        {
+            this.Date = DateTime.Now;
+        }
         [Key]
         public int Id { get; set; }
 
