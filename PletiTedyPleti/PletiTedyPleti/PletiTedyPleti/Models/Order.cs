@@ -17,10 +17,11 @@ namespace PletiTedyPleti.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(800)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Required]
+        [StringLength(200)]
         public string Size { get; set; }
 
         [Required]
