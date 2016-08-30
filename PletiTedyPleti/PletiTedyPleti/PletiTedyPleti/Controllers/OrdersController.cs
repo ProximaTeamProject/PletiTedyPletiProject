@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PletiTedyPleti.Models;
 using System.Web.Security;
+using Microsoft.AspNet.Identity;
 
 namespace PletiTedyPleti.Controllers
 {
@@ -16,7 +17,7 @@ namespace PletiTedyPleti.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Orders
-        //[Authorize]
+        [Authorize]
         public ActionResult Index()
         {
             //View(db.Orders.Include(or => or.Author.FullName).ToList());
@@ -31,7 +32,8 @@ namespace PletiTedyPleti.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
+            //Order order = db.Orders.Find(id);
+            Order order = db.Orders.Include(or => or.Author).FirstOrDefault(p => p.Id == id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -58,7 +60,10 @@ namespace PletiTedyPleti.Controllers
         {
             if (ModelState.IsValid)
             {
-                order.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                //string currentUserId = User.Identity.GetUserId();
+                //ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+                //order.Author = currentUser;
+               order.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
