@@ -1,14 +1,21 @@
 ﻿.jumbotron {
    background-image: url("/img/cover.jpg");
-   width: 1000px;
-   height: 300px;
 }
-
+.jumbotron h1{
+    color:#333;
+}
 .jumbotron a {
    background-color: bisque;
    border: 1px solid bisque;
    border-radius:5pt;
 }
+.jumbotron p{
+    color: #333;
+    font-style:italic;
+    font-weight: bold;
+    font-family:'Times New Roman', Times, serif;
+}
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -109,19 +116,24 @@ textarea {
         background-color: #f9bf55;
         padding: 8px 14px;
     }
-
-.about p{
-    padding-top:100px;
-    background-color: bisque;
-    font-size: 14px;
-    text-align: left;
-    margin-left: 300px;
+.about{
     display: inline-block;
+    width: 100%;
+    overflow: hidden;
 }
 .about img{
-    align-content: flex-start;  
-     width: 250px;
+    float:left;
+    padding:20px;
+    width: 250px;
     height: 350px;
+}
+.about div{
+    padding:20px;
+    border-radius: 10px;
+    background-color: bisque;
+    font-size: 14px;
+    margin-left: 300px;
+    margin-top: 50px;
 }
 
 .detail img {

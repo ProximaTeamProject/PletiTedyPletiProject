@@ -8,10 +8,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayNameFor(model => model.Post.Title)</h2>
 
 <div>
-    <h4>Post</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -69,27 +68,18 @@
     </dl>
 
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Post.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 
     <div>
-
         @if (User.Identity.GetUserId() != null)
         {
             Html.RenderAction("Create", "Comments", new { Id = Model.Post.Id });
         }
-
-
-
+               
         <br />
         @{
             Html.RenderAction("Index", "Comments", new { id = Model.Post.Id });
         }
-
-    </div>
-
-    <div>
-
     </div>
 </div>
