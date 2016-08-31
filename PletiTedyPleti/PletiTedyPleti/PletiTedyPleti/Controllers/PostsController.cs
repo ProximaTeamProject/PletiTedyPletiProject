@@ -75,6 +75,7 @@ namespace PletiTedyPleti.Controllers
 
 
         // GET: Posts/Create
+        [Authorize(Roles = "Administrators")]
         public ActionResult Create()
         {
             var category = db.Categories.ToList();
@@ -87,8 +88,9 @@ namespace PletiTedyPleti.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Category,Title,Body,Date,TagsRaw")] Post post)
+        public ActionResult Create([Bind(Include = "Id,Category,Title,Body,TagsRaw")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -109,8 +111,9 @@ namespace PletiTedyPleti.Controllers
             return View(post);
         }
 
- 
+
         // GET: Posts/Edit/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -129,6 +132,7 @@ namespace PletiTedyPleti.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Category,Title,Body,Date,LikeCounter,TagsRaw")] Post post)
         {
@@ -147,6 +151,7 @@ namespace PletiTedyPleti.Controllers
         }
 
         // GET: Posts/Delete/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -163,6 +168,7 @@ namespace PletiTedyPleti.Controllers
 
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
