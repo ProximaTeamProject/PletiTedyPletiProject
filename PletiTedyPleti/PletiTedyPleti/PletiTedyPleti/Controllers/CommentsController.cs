@@ -21,7 +21,7 @@ namespace PletiTedyPleti.Controllers
         {
             Combination commentsViewCombination = new Combination();
 
-            var comments = db.Comments.Include(c => c.Posts).Include(x => x.Author).Where(y => y.PostId == id).ToList();
+            var comments = db.Comments.Include(c => c.Posts).Include(x => x.Author).Where(y => y.PostId == id).OrderByDescending(x => x.Date).ToList();
             Post post = db.Posts.FirstOrDefault(x => x.Id == id);
 
             commentsViewCombination.CommentsCollection = comments;
@@ -97,6 +97,7 @@ namespace PletiTedyPleti.Controllers
                 commentsViewCombination.CommentsCollection = comments;
                 commentsViewCombination.Post = postAsSinglePost;
 
+                ModelState.Clear();
                 return PartialView("_CreatePartial");
             }
 
@@ -112,6 +113,7 @@ namespace PletiTedyPleti.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Comment comment = db.Comments.Include(y => y.Author).FirstOrDefault(x => x.Id == id);
 
             if (comment == null)
@@ -121,7 +123,7 @@ namespace PletiTedyPleti.Controllers
 
             if (comment.Author.Id != User.Identity.GetUserId() && !User.IsInRole("Administrators"))
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Account", new { @returnUrl = "/Comments/Edit/" + id });
             }
 
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Category", comment.PostId);
@@ -159,6 +161,7 @@ namespace PletiTedyPleti.Controllers
 
                 return RedirectToAction("Details", "Posts", new { id = comment.PostId });
             }
+
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Category", comment.PostId);
             return View(comment);
         }
@@ -178,6 +181,12 @@ namespace PletiTedyPleti.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (comment.Author.Id != User.Identity.GetUserId() && !User.IsInRole("Administrators"))
+            {
+                return RedirectToAction("Login", "Account", new { @returnUrl = "/Comments/Delete/" + id });
+            }
+
             return View(comment);
         }
 
@@ -188,6 +197,7 @@ namespace PletiTedyPleti.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Comment comment = db.Comments.Find(id);
+
             db.Comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Details", "Posts", new { id = comment.PostId });

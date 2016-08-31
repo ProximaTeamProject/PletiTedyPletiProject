@@ -26,9 +26,11 @@
         }
         <br />
         <div>
+
             @Model.PostsCollection.FirstOrDefault().Body
         </div>
         <div>
+
             @Model.PostsCollection.FirstOrDefault().Date
         </div>
         <dl>
@@ -53,16 +55,28 @@
         @Html.ActionLink("Back to List", "Index") |
         @Html.ActionLink("Харесай", "LikeCounter", new { Id = Model.PostsCollection.FirstOrDefault().Id})
     </p>
- 
+
     <div>
+
         @if (User.Identity.GetUserId() != null)
         {
             Html.RenderAction("Create", "Comments", new { Id = Model.PostsCollection.FirstOrDefault().Id });
         }
-               
-        <br />
-        @{
-            Html.RenderAction("Index", "Comments", new { id = Model.PostsCollection.FirstOrDefault().Id });
+        <br/>
+
+        @if (User.Identity.GetUserId() == null)
+        {
+            @Html.ActionLink("Напиши коментар---->", "Login", "Account", new {@returnUrl = "/Posts/Details/" + @Model.PostsCollection.FirstOrDefault().Id}, null)
         }
+
+        <br/>
+        @{
+            Html.RenderAction("Index", "Comments", new {id = Model.PostsCollection.FirstOrDefault().Id});
+        }
+
+        <br/>
+
+
+
     </div>
 </div>
