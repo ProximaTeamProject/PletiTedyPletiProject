@@ -18,6 +18,18 @@
     font-family:'Times New Roman', Times, serif;
 }
 
+.commentsTable {
+border: 1px solid;
+    /* padding: 0 3%; */
+    padding: 10px;
+    margin-bottom: 1.5em;
+}
+
+.commentsTable a {
+        color: #333;
+    font-weight: bold;
+}
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
