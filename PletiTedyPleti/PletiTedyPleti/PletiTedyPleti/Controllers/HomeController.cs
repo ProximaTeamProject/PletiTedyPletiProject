@@ -14,7 +14,7 @@ namespace PletiTedyPleti.Controllers
         public ActionResult Index()
         {
 
-            var posts = db.Posts.OrderByDescending(p => p.Category);
+            var posts = db.Posts.OrderByDescending(p => p.Category).Take(5);
             var tags = db.Tags.ToList();
             var category = db.Categories;
 

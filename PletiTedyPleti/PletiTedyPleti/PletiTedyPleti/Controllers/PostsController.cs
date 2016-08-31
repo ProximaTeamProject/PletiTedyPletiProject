@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PletiTedyPleti.Models;
+using PletiTedyPleti.Classes;
 
 namespace PletiTedyPleti.Controllers
 {
@@ -27,6 +28,14 @@ namespace PletiTedyPleti.Controllers
             return View(db.Posts.ToList());
         }
 
+        public ActionResult LikeCounter(int Id)
+        {
+            var post = db.Posts.FirstOrDefault(x => x.Id == Id);
+            post.LikeCounter++;
+            db.SaveChanges();
+          
+            return RedirectToAction("Details", new { Id = Id });
+        }
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
@@ -43,12 +52,16 @@ namespace PletiTedyPleti.Controllers
                 return HttpNotFound();
             }
 
-            Combination commentsViewCombination = new Combination();
+            CategoriesViewCombination commentsViewCombination = new CategoriesViewCombination();
 
             var comments = db.Comments.Include(c => c.Posts).Include(x => x.Author).Where(y => y.PostId == id).ToList();
+            var posts = new List<Post>();
+            posts.Add(post);
+            var images = db.Images.ToList();
 
             commentsViewCombination.CommentsCollection = comments;
-            commentsViewCombination.Post = post;
+            commentsViewCombination.PostsCollection = posts;
+            commentsViewCombination.ImagesCollection = images;
 
             return View(commentsViewCombination);
         }

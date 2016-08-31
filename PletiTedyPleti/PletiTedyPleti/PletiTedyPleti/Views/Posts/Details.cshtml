@@ -2,84 +2,66 @@
 @using System.Web.Mvc.Html
 @using Microsoft.AspNet.Identity
 @using PletiTedyPleti.Models
-@model PletiTedyPleti.Controllers.Combination
+@model PletiTedyPleti.Classes.CategoriesViewCombination
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>@Html.DisplayNameFor(model => model.Post.Title)</h2>
+<h2>@Model.PostsCollection.FirstOrDefault().Title</h2>
 
 <div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Category)
-        </dt>
+    <div class="dl-horizontal">
+        @foreach (var img in Model.ImagesCollection)
+        {
+            <div class="col-md-3">
+                <div class="about">
+                    @if (img.name == Model.PostsCollection.FirstOrDefault().Title)
+                    {
+                        <img src="@img.adress" alt="@img.name" />
+                    }
+                </div>
+            </div>
+        }
+        <div>
+            @Model.PostsCollection.FirstOrDefault().Body
+        </div>
+        <div>
+            @Model.PostsCollection.FirstOrDefault().Date
+        </div>
+        <dl>
+            <dt>
+                <span>Тагове </span>
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Post.Category)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Post.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Post.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Post.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Post.LikeCounter)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Post.LikeCounter)
-        </dd>
-
-        <dt>
-            <span>Тагове </span>
-        </dt>
-
-        <dd>
-            @foreach (var tag in Model.Post.Tags)
+            <dd>
+                @foreach (var tag in Model.PostsCollection.FirstOrDefault().Tags)
             {
-                <span class="tags">
-                    <a href="/Posts/DisplayTagSearchResults/@tag.Id">@tag.Name</a>
-                </span>
-            }
-        </dd>
-    </dl>
-
+                    <span class="tags">
+                        <a href="/Posts/DisplayTagSearchResults/@tag.Id">@tag.Name</a>
+                    </span>
+                }
+            </dd>
+        </dl>
+    </div>
+    <div>
+         Харесано: @Model.PostsCollection.FirstOrDefault().LikeCounter пъти
+    </div>
     <p>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index") |
+        @Html.ActionLink("Харесай", "LikeCounter", new { Id = Model.PostsCollection.FirstOrDefault().Id})
     </p>
-
+ 
     <div>
         @if (User.Identity.GetUserId() != null)
         {
-            Html.RenderAction("Create", "Comments", new { Id = Model.Post.Id });
+            Html.RenderAction("Create", "Comments", new { Id = Model.PostsCollection.FirstOrDefault().Id });
         }
                
         <br />
         @{
-            Html.RenderAction("Index", "Comments", new { id = Model.Post.Id });
+            Html.RenderAction("Index", "Comments", new { id = Model.PostsCollection.FirstOrDefault().Id });
         }
     </div>
 </div>

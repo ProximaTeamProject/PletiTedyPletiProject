@@ -11,6 +11,8 @@ namespace PletiTedyPleti.Classes
         public IEnumerable<Images> ImagesCollection { get; set; }
         public IEnumerable<Post> PostsCollection { get; set; }
 
+        public IEnumerable<Comment> CommentsCollection { get; set; }
+
         public Category Category { get; set; }
     }
 }
