@@ -15,8 +15,8 @@
     <div class="dl-horizontal">
         @foreach (var img in Model.ImagesCollection)
         {
-            <div class="col-md-3">
-                <div class="about">
+            <div class="col-md-4">
+                <div class="detail">
                     @if (img.name == Model.PostsCollection.FirstOrDefault().Title)
                     {
                         <img src="@img.adress" alt="@img.name" />
@@ -24,6 +24,7 @@
                 </div>
             </div>
         }
+        <br />
         <div>
             @Model.PostsCollection.FirstOrDefault().Body
         </div>
@@ -48,7 +49,7 @@
     <div>
          Харесано: @Model.PostsCollection.FirstOrDefault().LikeCounter пъти
     </div>
-    <p>
+    <p class="footer">
         @Html.ActionLink("Back to List", "Index") |
         @Html.ActionLink("Харесай", "LikeCounter", new { Id = Model.PostsCollection.FirstOrDefault().Id})
     </p>
