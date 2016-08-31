@@ -97,6 +97,7 @@ namespace PletiTedyPleti.Controllers
                 commentsViewCombination.CommentsCollection = comments;
                 commentsViewCombination.Post = postAsSinglePost;
 
+                ModelState.Clear();
                 return PartialView("_CreatePartial");
             }
 
