@@ -15,10 +15,12 @@ namespace PletiTedyPleti.Controllers
         {
 
             var posts = db.Posts.OrderByDescending(p => p.Category).Take(5);
-            var tags = db.Tags.ToList();
+
+            var mostPopularTags = db.Tags.Include(t=>t.Posts).OrderByDescending(x => x.Posts.Count).Take(5);
+
             var category = db.Categories;
 
-            ViewBag.Tags = tags;
+            ViewBag.Tags = mostPopularTags;
             ViewBag.Categories = category;
             return View(posts.ToList());
         }
