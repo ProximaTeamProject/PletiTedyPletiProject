@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Classes\CategoriesViewCombination.cs" />
+    <Compile Include="Classes\UserInformation.cs" />
     <Compile Include="Classes\Utils.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -327,6 +328,7 @@
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Comments\_CreatePartial.cshtml" />
     <Content Include="Views\Comments\_IndexPartial.cshtml" />
+    <Content Include="Views\Account\AccountDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

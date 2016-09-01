@@ -12,8 +12,8 @@
             <div>
                 <span><i>Автор: </i></span>@if (item.Author != null)
                 {
-                    @item.Author.UserName
-                    ;
+                    @Html.ActionLink(@item.Author.UserName, "AccountDetails", "Account", new { userId = item.Author.Id }, null)
+                                        ;
                 },<i> <span>Публикувано на: @item.Date</span></i>
             </div>
             <br/>
@@ -43,7 +43,6 @@
 
         </div>
     }
-
 
 
 
