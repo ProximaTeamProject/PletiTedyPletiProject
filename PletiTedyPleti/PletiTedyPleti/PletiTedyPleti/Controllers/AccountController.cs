@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using PletiTedyPleti.Classes;
 using PletiTedyPleti.Models;
 
 namespace PletiTedyPleti.Controllers
@@ -17,6 +19,8 @@ namespace PletiTedyPleti.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
+
 
         public AccountController()
         {
@@ -345,6 +349,21 @@ namespace PletiTedyPleti.Controllers
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
+        }
+
+
+        public ActionResult AccountDetails(string userId)
+        {
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == userId);
+
+            UserInformation userInformation = new UserInformation();
+
+
+
+            userInformation.User = currentUser;
+            userInformation.CommentedPostsCollection = db.Posts.Include(x => x.Comments).Where(x => x.Comments.Any(y => y.Author.Id == userId));
+            userInformation.CommentsCount = db.Comments.Count(x => x.Author.Id == userId);
+            return View(userInformation);
         }
 
         //

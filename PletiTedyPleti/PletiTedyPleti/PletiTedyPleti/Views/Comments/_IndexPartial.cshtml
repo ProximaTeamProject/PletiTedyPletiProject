@@ -6,45 +6,43 @@
     ViewBag.Title = "Index";
 }
 
-<span>
-
-
-</span>
-
-<div class="table">
     @foreach (var item in Model.CommentsCollection)
     {
-        <br />
-        <div>
-            <span><i>Автор: </i></span>@if (item.Author != null)
-            {
-                @item.Author.UserName
-                ;
-            },<i> <span>Публикувано на: @item.Date</span></i>
-        </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.Body)
-            <br />
-            <br />
-            @if (item.AuthorOfLastChangeName != null)
-            {
-                <span><i>Последна промяна направена на @item.TimeOfLastChange от @item.AuthorOfLastChangeName</i></span>
+        <div class="commentsTable">
+            <div>
+                <span><i>Автор: </i></span>@if (item.Author != null)
+                {
+                    @Html.ActionLink(@item.Author.UserName, "AccountDetails", "Account", new { userId = item.Author.Id }, null)
+                                        ;
+                },<i> <span>Публикувано на: @item.Date</span></i>
+            </div>
+            <br/>
+            <div>
+                @Html.DisplayFor(modelItem => item.Body)
+                <br />
+                <br />
+                @if (item.AuthorOfLastChangeName != null)
+                {
+                    <span><i>Последна промяна направена на @item.TimeOfLastChange от @item.AuthorOfLastChangeName</i></span>
+                    <br/>
+                    <br />
 
-            }
+
+                }
+            </div>
+            <div class="commentsOptions">
+                @if (User.IsInRole("Administrators") || (item.Author != null && User.Identity.GetUserId() == item.Author.Id))
+                {
+                    @Html.ActionLink("Редактирай", "Edit", "Comments", new {id = item.Id}, null)
+                    @:| @Html.ActionLink("Изтрий", "Delete", "Comments", new {id = item.Id}, null) |
+                }
+
+                @Html.ActionLink("Детайли", "Details", "Comments", new {id = item.Id}, null)
+            </div>
 
 
-        </div>
-        <div>
-            @if (User.IsInRole("Administrators") || (item.Author != null && User.Identity.GetUserId() == item.Author.Id))
-            {
-                @Html.ActionLink("Редактирай", "Edit", "Comments", new { id = item.Id }, null)
-                @:| @Html.ActionLink("Изтрий", "Delete", "Comments", new { id = item.Id }, null) |
-            }
-
-            @Html.ActionLink("Детайли", "Details", "Comments", new { id = item.Id }, null)
         </div>
     }
 
-</div>
 
 
