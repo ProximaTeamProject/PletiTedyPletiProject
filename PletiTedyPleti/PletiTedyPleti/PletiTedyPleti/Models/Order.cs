@@ -16,11 +16,11 @@ namespace PletiTedyPleti.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете описание")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете размери")]
         [StringLength(200)]
         public string Size { get; set; }
 

@@ -48,11 +48,11 @@ namespace PletiTedyPleti.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете потребителско име")]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете парола")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -63,23 +63,23 @@ namespace PletiTedyPleti.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Моля, въведете е-майл")]
+        [EmailAddress(ErrorMessage = "Въведеният е-майл адрес не е валиден е-майл адрес")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
+        [Required(ErrorMessage = "Моля, въведете парола")]
+        [StringLength(100, ErrorMessage = "Паролата трябва да бъде поне {2} символа.", MinimumLength = 4)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Паролите не съвпадат.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, въведете потребителско име")]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 
