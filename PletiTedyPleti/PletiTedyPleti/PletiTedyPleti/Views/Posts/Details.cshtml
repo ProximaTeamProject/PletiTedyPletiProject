@@ -12,7 +12,7 @@
 
 <div>
     <hr />
-    <div class="dl-horizontal">
+    <div class="detail">
         @foreach (var img in Model.ImagesCollection)
         {
             <div class="col-md-4">
@@ -26,11 +26,9 @@
         }
         <br />
         <div>
-
             @Model.PostsCollection.FirstOrDefault().Body
         </div>
         <div>
-
             @Model.PostsCollection.FirstOrDefault().Date
         </div>
         <dl>
@@ -48,16 +46,15 @@
             </dd>
         </dl>
     </div>
-    <div>
+    <div class="liked">
          Харесано: @Model.PostsCollection.FirstOrDefault().LikeCounter пъти
     </div>
     <p class="footer">
-        @Html.ActionLink("Back to List", "Index") |
+        @Html.ActionLink("Back to List", "Index")   |  
         @Html.ActionLink("Харесай", "LikeCounter", new { Id = Model.PostsCollection.FirstOrDefault().Id})
     </p>
 
     <div>
-
         @if (User.Identity.GetUserId() != null)
         {
             Html.RenderAction("Create", "Comments", new { Id = Model.PostsCollection.FirstOrDefault().Id });
@@ -73,10 +70,6 @@
         @{
             Html.RenderAction("Index", "Comments", new {id = Model.PostsCollection.FirstOrDefault().Id});
         }
-
         <br/>
-
-
-
     </div>
 </div>

@@ -1,9 +1,10 @@
 ﻿.jumbotron {
    background-image: url("/img/cover.jpg");
-   height: 400px;
+   height: 250px;
 }
 .jumbotron h1{
-    color:#333;
+    color:#190000;
+    opacity: 1;
 }
 .jumbotron a {
    background-color: bisque;
@@ -11,10 +12,11 @@
    border-radius:5pt;
 }
 .jumbotron p{
-    color: #333;
+    opacity: 1;
+    color: #190000;
     font-style:italic;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 20px;
     font-family:'Times New Roman', Times, serif;
 }
 
@@ -55,7 +57,7 @@ textarea {
     display: inline-block;
     background: bisque;
     margin-right: 10px;
-    padding-top: 15px;
+    padding-top: 10px;
     width: 200px;
     height: 400px;
     float: left;
@@ -86,11 +88,19 @@ textarea {
         width: 20000px;
         height: 10000px;
     }
-
+.row{
+    background-color:bisque;
+    border-radius:10px;
+    }
 .row a {
     color: inherit;
    }
+.row a:hover {
+    color: aquamarine;
+   }
 .row img {
+    margin-bottom: 15px;
+    padding-left: 20px;
     width: 250px;
     height: 350px;
 }
@@ -138,12 +148,19 @@ textarea {
     margin-left: 300px;
     margin-top: 50px;
 }
+.detail{
 
+}
 .detail img {
+    display: inline-block;
     width: 300px;
     height: 200px;
 }
 .footer{
     clear:both;
     background-color: bisque;
+}
+.liked{
+    font-size: 14px;
+    font-weight: bold;
 }
