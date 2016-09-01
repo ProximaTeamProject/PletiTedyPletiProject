@@ -8,7 +8,7 @@
 <h2>Акаунт</h2>
 
 <div>
-    <hr />
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
             <span>Потребителско име:</span>
@@ -38,7 +38,10 @@
 </div>
 
 <div>
-    @Html.ActionLink("Настройки на профила", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    @if(User.IsInRole("Administrators") || (User.Identity.GetUserId() == Model.User.Id))
+    {
+        @Html.ActionLink("Настройки на профила", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
+    }
 </div>
 
 <h2>Коментирани публикации:</h2>
