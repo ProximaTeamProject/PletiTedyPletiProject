@@ -73,19 +73,29 @@ namespace PletiTedyPleti.Controllers
         }
 
         // GET: Orders/Edit/5
-        [Authorize(Roles = "Administrators")]
-        //[Authorize]
+        //[Authorize(Roles = "Administrators")]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
+            //Order order = db.Orders.Find(id);
+            Order order = db.Orders.Include(or => or.Author).
+                             FirstOrDefault(or => or.Id == id);
             if (order == null)
             {
                 return HttpNotFound();
             }
+           
+            if (order.Author.Id != User.Identity.GetUserId() && !User.IsInRole("Administrators"))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Description", "Sizes", order.OrderId);
+
             return View(order);
         }
 
@@ -93,7 +103,8 @@ namespace PletiTedyPleti.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Administrators")]
+        [Authorize]
+        //[Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Description,Size,Date")] Order order)
         {

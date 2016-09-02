@@ -16,6 +16,8 @@ namespace PletiTedyPleti.Models
         [Key]
         public int Id { get; set; }
 
+        public int OrderId { get; set; }
+
         [Required]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
