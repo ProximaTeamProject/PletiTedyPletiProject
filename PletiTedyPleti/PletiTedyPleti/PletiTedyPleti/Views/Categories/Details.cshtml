@@ -1,0 +1,40 @@
+﻿@using System.Runtime.CompilerServices
+@model PletiTedyPleti.Classes.CategoriesViewCombination
+
+@{
+    ViewBag.Categoties = "Details";
+}
+
+<h4>Категория</h4>
+
+<div>
+    <h2>@Html.DisplayFor(model => model.Category.name)</h2>
+
+   
+    <div class="detail">
+        @foreach (var post in Model.PostsCollection)
+        {
+            <div class="col-md-4">
+                <div>
+                    <h2>
+                        <a href="/Posts/Details/@post.Id">@post.Title</a>
+                    </h2>
+                    <div class="detail">
+                        @if (Model.ImagesCollection.Any(x => x.name == post.Title))
+                        {
+                            <img src="@Model.ImagesCollection.FirstOrDefault(x=>x.name == post.Title).adress"
+                                 alt="@post.Title"/>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<hr />
+
+<p class="footer">
+    @Html.ActionLink("Back to List", "Index", "Home")
+</p>

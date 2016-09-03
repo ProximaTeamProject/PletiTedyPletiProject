@@ -1,66 +1,75 @@
-﻿@model PletiTedyPleti.Models.Post
+﻿@using System.Collections
+@using System.Web.Mvc.Html
+@using Microsoft.AspNet.Identity
+@using PletiTedyPleti.Models
+@model PletiTedyPleti.Classes.CategoriesViewCombination
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Model.PostsCollection.FirstOrDefault().Title</h2>
 
 <div>
-    <h4>Post</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Author.Email)
-        </dt>
+    <div class="detail">
+        @foreach (var img in Model.ImagesCollection)
+        {
+            <div class="col-md-4">
+                <div class="detail">
+                    @if (img.name == Model.PostsCollection.FirstOrDefault().Title)
+                    {
+                        <img src="@img.adress" alt="@img.name" />
+                    }
+                </div>
+            </div>
+        }
+        <br />
+        <div>
+            @Model.PostsCollection.FirstOrDefault().Body
+        </div>
+        <div>
+            @Model.PostsCollection.FirstOrDefault().Date
+        </div>
+        <dl>
+            <dt>
+                <span>Тагове </span>
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Author.Email)
-        </dd>
+            <dd>
+                @foreach (var tag in Model.PostsCollection.FirstOrDefault().Tags)
+            {
+                    <span class="tags">
+                        <a href="/Posts/DisplayTagSearchResults/@tag.Id">@tag.Name</a>
+                    </span>
+                }
+            </dd>
+        </dl>
+    </div>
+    <div class="liked">
+         Харесано: @Model.PostsCollection.FirstOrDefault().LikeCounter пъти
+    </div>
+    <p class="footer">
+        @Html.ActionLink("Back to List", "Index")   |  
+        @Html.ActionLink("Харесай", "LikeCounter", new { Id = Model.PostsCollection.FirstOrDefault().Id})
+    </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
+    <div>
+        @if (User.Identity.GetUserId() != null)
+        {
+            Html.RenderAction("Create", "Comments", new { Id = Model.PostsCollection.FirstOrDefault().Id });
+        }
+        <br/>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
+        @if (User.Identity.GetUserId() == null)
+        {
+            @Html.ActionLink("Напиши коментар---->", "Login", "Account", new {@returnUrl = "/Posts/Details/" + @Model.PostsCollection.FirstOrDefault().Id}, null)
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LikeCounter)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LikeCounter)
-        </dd>
-
-    </dl>
+        <br/>
+        @{
+            Html.RenderAction("Index", "Comments", new {id = Model.PostsCollection.FirstOrDefault().Id});
+        }
+        <br/>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

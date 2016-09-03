@@ -4,30 +4,22 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Детайли</h2>
 
 <div>
-    <h4>Comment</h4>
+    <h4>Коментар</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Author.Email)
+            <span>Автор: </span>
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Author.Email)
+            @Html.DisplayFor(model => model.Author.UserName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Post.Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Post.Category)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
+            <span>Съдържание: </span>
         </dt>
 
         <dd>
@@ -35,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            <span>Дата: </span>
         </dt>
 
         <dd>
@@ -45,6 +37,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактирай", "Edit", new {id = Model.Id}) |
+    @Html.ActionLink("Обратно към поста", "Details", "Posts", new { id = Model.PostId }, null)
 </p>

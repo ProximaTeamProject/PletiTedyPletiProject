@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNet.Identity
+@model PletiTedyPleti.Classes.UserInformation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Акаунт</h2>
+
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            <span>Потребителско име:</span>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+        <dt>
+            <span>E-mail: </span>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            <span>Брой коментари: </span>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentsCount)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    @if(User.IsInRole("Administrators") || (User.Identity.GetUserId() == Model.User.Id))
+    {
+        @Html.ActionLink("Настройки на профила", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
+    }
+</div>
+
+<h2>Коментирани публикации:</h2>
+
+<div>
+    @Html.Partial("~/Views/Posts/Index.cshtml", Model.CommentedPostsCollection);
+
+</div>
+<p>
+    @Html.ActionLink("Обратно към блога", "Index", "Home")
+</p>
+

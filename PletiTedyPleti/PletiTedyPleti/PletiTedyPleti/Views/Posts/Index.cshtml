@@ -1,61 +1,58 @@
-﻿@model IEnumerable<PletiTedyPleti.Models.Post>
+﻿using PletiTedyPleti.Classes;
+@model IEnumerable<PletiTedyPleti.Models.Post>
+
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Галерия</h2>
 
-<p>
+<p>@if (User.IsInRole("Administrators"))
+{
     @Html.ActionLink("Create New", "Create")
+}
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Author.Email)
+            <a class="postIndexA">Снимка</a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category)
+           <a class="postIndexA">Наименование</a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            <a class="postIndexA">Съдържание</a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Body)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LikeCounter)
+            <a class="postIndexA">Харесвания</a>
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.Email)
+        <td class="postIndexTd">
+            @Html.DisplayFor(modelItem => item.Images)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
+        <td class="postIndexTd">
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Body)
+            @Html.ActionLink("Подробности", "Details", "Posts", new { id = item.Id }, null)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
+        <td class="postIndexTd">
             @Html.DisplayFor(modelItem => item.LikeCounter)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        <td class="postIndexTd">
+            @if (User.IsInRole("Administrators"))
+            {
+                @Html.ActionLink("Edit", "Edit", "Posts", new { id = item.Id }, null) @:|
+                @Html.ActionLink("Delete", "Delete", "Posts", new { id = item.Id }, null) @:|
+            }
+            <br/>
+            @Html.ActionLink($"{item.Comments.Count} коментара", "Details","Posts", new { id = item.Id }, null)
         </td>
     </tr>
 }
