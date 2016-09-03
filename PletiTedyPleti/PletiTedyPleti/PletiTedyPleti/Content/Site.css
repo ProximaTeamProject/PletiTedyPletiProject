@@ -74,31 +74,31 @@ textarea {
     float: left;
 }
 
-    .menu a {
-        display: block;
-        line-height: 15px;
-        text-align: left;
-        height: 15px;
-        margin-right: 5px;
-        margin-top: 5px;
-        text-decoration: none;
-        color: brown;
-    }
+.menu a {
+    display: block;
+    line-height: 15px;
+    text-align: left;
+    height: 15px;
+    margin-right: 5px;
+    margin-top: 5px;
+    text-decoration: none;
+    color: brown;
+}
 
-     .menu a:hover {
-        text-decoration: underline;
-        background-color: bisque;
-     }
+ .menu a:hover {
+    text-decoration: underline;
+    background-color: bisque;
+ }
 
-    .menu ul {
-        margin-left: -15px;
-        margin-top: 15px;
-    }
+.menu ul {
+    margin-left: -15px;
+    margin-top: 15px;
+}
 
-    .best {
-        width: 20000px;
-        height: 10000px;
-    }
+.best {
+    width: 20000px;
+    height: 10000px;
+}
 .row{
     background-color:bisque;
     border-radius:10px;
@@ -174,4 +174,13 @@ textarea {
 .liked{
     font-size: 14px;
     font-weight: bold;
+}
+.postIndexA{
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+.postIndexTd{
+    text-align: center;
 }

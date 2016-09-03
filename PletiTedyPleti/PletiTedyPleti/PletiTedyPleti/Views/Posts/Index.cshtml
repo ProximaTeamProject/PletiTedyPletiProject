@@ -1,4 +1,6 @@
-﻿@model IEnumerable<PletiTedyPleti.Models.Post>
+﻿using PletiTedyPleti.Classes;
+@model IEnumerable<PletiTedyPleti.Models.Post>
+
 
 @{
     ViewBag.Title = "Index";
@@ -14,48 +16,42 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category)
+            <a class="postIndexA">Снимка</a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+           <a class="postIndexA">Наименование</a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Body)
+            <a class="postIndexA">Съдържание</a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LikeCounter)
+            <a class="postIndexA">Харесвания</a>
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
+        <td class="postIndexTd">
+            @Html.DisplayFor(modelItem => item.Images)
         </td>
-        <td>
+        <td class="postIndexTd">
             @Html.DisplayFor(modelItem => item.Title)
-       </td>
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Body)
+            @Html.ActionLink("Подробности", "Details", "Posts", new { id = item.Id }, null)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
+        <td class="postIndexTd">
             @Html.DisplayFor(modelItem => item.LikeCounter)
         </td>
-        <td>
+        <td class="postIndexTd">
             @if (User.IsInRole("Administrators"))
             {
                 @Html.ActionLink("Edit", "Edit", "Posts", new { id = item.Id }, null) @:|
                 @Html.ActionLink("Delete", "Delete", "Posts", new { id = item.Id }, null) @:|
             }
-            @Html.ActionLink("Details", "Details", "Posts", new { id=item.Id }, null) |
-           <br/>
+            <br/>
             @Html.ActionLink($"{item.Comments.Count} коментара", "Details","Posts", new { id = item.Id }, null)
         </td>
     </tr>
