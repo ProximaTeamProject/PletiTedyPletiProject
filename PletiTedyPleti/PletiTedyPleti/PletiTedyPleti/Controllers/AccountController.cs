@@ -90,7 +90,7 @@ namespace PletiTedyPleti.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Грешна парола или потребителско име.");
                     return View(model);
             }
         }
